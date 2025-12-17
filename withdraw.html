@@ -3,8 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Withdraw Money - Growup Trading</title>
+  <title>Withdraw - GrowUp Invest</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
   <style>
+    :root {
+      --primary: #dc3545;
+      --secondary: #ffc107;
+      --dark: #212529;
+      --light: #f8f9fa;
+      --card-bg: #ffffff;
+      --bg: linear-gradient(145deg, #f3f4f6, #dde3ea);
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -12,172 +24,239 @@
     }
 
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #2e8b57, #1e3c72);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg);
+      color: var(--dark);
     }
 
     .container {
-      background: #fff;
-      padding: 35px 40px;
-      border-radius: 12px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-      width: 100%;
-      max-width: 400px;
-      animation: fadeIn 0.7s ease;
+      max-width: 600px;
+      margin: 3rem auto;
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.08);
     }
 
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: scale(0.95);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
+    .back-btn {
+      background: #eee;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+      transition: 0.3s ease;
     }
 
-    h1 {
+    .back-btn:hover {
+      background: #ddd;
+    }
+
+    h2 {
       text-align: center;
-      color: #2e8b57;
-      margin-bottom: 5px;
-    }
-
-    .subheading {
-      text-align: center;
-      margin-bottom: 30px;
-      color: #555;
-      font-size: 15px;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 6px;
+      font-size: 1.9rem;
       font-weight: 600;
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+
+    h2 img {
+      width: 30px;
+    }
+
+    .balance-card {
+      background: linear-gradient(135deg, #ffe9b0, #ffd36b);
+      padding: 1.8rem;
+      border-radius: 16px;
+      text-align: center;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+
+    .balance-card::after {
+      content: "NPR";
+      position: absolute;
+      top: 10px;
+      right: 16px;
+      background: #fff8e1;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #555;
+    }
+
+    .balance-amount {
+      font-size: 2.4rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .balance-info {
+      font-size: 0.95rem;
       color: #333;
     }
 
-    input[type="text"],
-    input[type="number"] {
-      width: 100%;
-      padding: 10px 12px;
-      margin-bottom: 20px;
-      border: 2px solid #ddd;
-      border-radius: 8px;
-      font-size: 15px;
+    .withdraw-methods {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 1rem;
+    }
+
+    .method {
+      background: #fafafa;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      padding: 1rem;
+      text-align: center;
       transition: 0.3s;
     }
 
-    input:focus {
-      border-color: #2e8b57;
-      outline: none;
-      box-shadow: 0 0 5px rgba(46, 139, 87, 0.3);
+    .method:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
-    button {
-      width: 100%;
-      padding: 12px;
-      background: #2e8b57;
+    .method-logo img {
+      height: 48px;
+      margin-bottom: 10px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .method span {
+      display: block;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .withdraw-btn {
+      background: var(--primary);
       color: white;
-      font-size: 16px;
-      font-weight: 600;
       border: none;
-      border-radius: 8px;
+      padding: 0.45rem 0.8rem;
+      font-size: 0.85rem;
+      border-radius: 6px;
       cursor: pointer;
-      transition: background 0.3s ease;
+      font-weight: 500;
+      transition: 0.3s;
     }
 
-    button:hover {
-      background: #256d48;
+    .withdraw-btn:hover {
+      background: #b42835;
     }
 
     .notice {
-      margin-top: 20px;
-      padding: 14px;
-      border-radius: 8px;
-      font-weight: bold;
+      font-size: 0.95rem;
+      margin-top: 2rem;
+      color: #d63333;
       text-align: center;
-      display: none;
+      font-weight: 500;
     }
 
-    .notice.success {
-      color: #155724;
-      background-color: #d4edda;
-      border: 1px solid #c3e6cb;
-    }
-
-    .notice.error {
-      color: #721c24;
-      background-color: #f8d7da;
-      border: 1px solid #f5c6cb;
+    footer {
+      margin-top: 1.8rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #777;
     }
   </style>
+
 </head>
 <body>
+
   <div class="container">
-    <h1>Withdraw Money</h1>
-    <p class="subheading">Growup Trading</p>
 
-    <form id="withdrawForm">
-      <label for="name">Account Holder Name:</label>
-      <input type="text" id="name" name="name" placeholder="John Doe" required />
+    <button class="back-btn" onclick="history.back()">← Back</button>
 
-      <label for="accountNumber">Account Number:</label>
-      <input type="text" id="accountNumber" name="accountNumber" placeholder="1234567890" required />
+    <h2>
+      <img src="https://cdn-icons-png.flaticon.com/512/2165/2165063.png">
+      Earnings
+    </h2>
 
-      <label for="amount">Withdraw Amount (₹):</label>
-      <input type="number" id="amount" name="amount" placeholder="4500 - 50000" required />
+    <div class="balance-card">
+      <div class="balance-amount">Rs 1800.00</div>
+      <div class="balance-info">Your available balance in Grow-Up Invest</div>
+    </div>
 
-      <button type="submit">Submit</button>
-    </form>
+    <div class="withdraw-methods">
 
-    <div id="notice" class="notice"></div>
+      <div class="method">
+        <div class="method-logo">
+          <img src="https://raw.githubusercontent.com/nepjob/Esewa/refs/heads/main/esewa_20200118185351%20(1).jpg">
+        </div>
+        <span>Esewa</span>
+        <button class="withdraw-btn" onclick="window.location.href='Acdetail.html'">Withdraw</button>
+      </div>
+
+      <div class="method">
+        <div class="method-logo">
+          <img src="https://raw.githubusercontent.com/nepjob/Esewa/refs/heads/main/1674802727434_15aba63e-1877-4b9d-952e-227e23d4c811.png">
+        </div>
+        <span>Khalti</span>
+        <button class="withdraw-btn" onclick="window.location.href='Acdetail.html'">Withdraw</button>
+      </div>
+
+      <div class="method">
+        <div class="method-logo">
+          <img src="https://raw.githubusercontent.com/nepjob/Esewa/refs/heads/main/unnamed.png">
+        </div>
+        <span>IMEPay</span>
+        <button class="withdraw-btn" onclick="window.location.href='Acdetail.html'">Withdraw</button>
+      </div>
+
+      <div class="method">
+        <div class="method-logo">
+          <img src="https://raw.githubusercontent.com/nepjob/Esewa/refs/heads/main/bank-icon-logo-design-vector.jpg">
+        </div>
+        <span>Bank</span>
+        <button class="withdraw-btn" onclick="window.location.href='Acdetail.html'">Withdraw</button>
+      </div>
+
+      <div class="method">
+        <div class="method-logo">
+          <img src="https://raw.githubusercontent.com/nepjob/Esewa/refs/heads/main/6963703.png">
+        </div>
+        <span>Card</span>
+        <button class="withdraw-btn" onclick="window.location.href='Acdetail.html'">Withdraw</button>
+      </div>
+
+    </div>
+
+    <div class="notice">
+      ⚠ You can withdraw only after investment is completed. Please wait if you are new.
+    </div>
+
+    <footer>
+      © 2025 Grow-Up Invest Nepal — Secure & Trusted
+    </footer>
+
   </div>
 
-  <script>
-    const form = document.getElementById('withdrawForm');
-    const notice = document.getElementById('notice');
-
-    form.addEventListener('submit', function(event) {
-      event.preventDefault();
-
-      const name = form.name.value.trim();
-      const accountNumber = form.accountNumber.value.trim();
-      const amount = parseFloat(form.amount.value);
-
-      if (name === '' || accountNumber === '') {
-        showNotice('Please fill in all required fields.', 'error');
-        return;
-      }
-
-      if (isNaN(amount)) {
-        showNotice('Please enter a valid amount.', 'error');
-        return;
-      }
-
-      if (amount < 2500) {
-        showNotice('Minimum withdrawal amount is ₹4,500.', 'error');
-        return;
-      }
-
-      if (amount > 50000) {
-        showNotice('Maximum withdrawal amount is ₹50,000.', 'error');
-        return;
-      }
-
-      showNotice(Notice: You have enough balance. You can withdraw ₹${amount.toLocaleString()}., 'success');
-    });
-
-    function showNotice(message, type) {
-      notice.textContent = message;
-      notice.className = 'notice ' + type;
-      notice.style.display = 'block';
-    }
-  </script>
 </body>
-
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
