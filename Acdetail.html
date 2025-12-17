@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Secure Withdrawal</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Font Awesome Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+:root{
+    --bg:#020617;
+    --card:#0f172a;
+    --input:#111827;
+    --accent:#22c55e;
+    --danger:#ef4444;
+    --text:#e5e7eb;
+    --muted:#9ca3af;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Inter',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:radial-gradient(circle at top,#020617,#020617 60%,#020617);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--text);
+}
+
+.card{
+    width:100%;
+    max-width:420px;
+    background:linear-gradient(180deg,#020617,#0f172a);
+    padding:24px;
+    border-radius:20px;
+    box-shadow:0 30px 60px rgba(0,0,0,.7);
+}
+
+.header{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:20px;
+}
+
+.header i{
+    color:var(--accent);
+    font-size:26px;
+}
+
+.header h2{
+    font-size:22px;
+    font-weight:600;
+}
+
+label{
+    font-size:13px;
+    color:var(--muted);
+    margin:12px 0 6px;
+    display:block;
+}
+
+select,input{
+    width:100%;
+    padding:14px;
+    border-radius:14px;
+    border:none;
+    outline:none;
+    background:var(--input);
+    color:var(--text);
+    font-size:14px;
+}
+
+input::placeholder{
+    color:#6b7280;
+}
+
+.amount-box{
+    display:flex;
+    gap:10px;
+    margin-top:10px;
+}
+
+.amount-box button{
+    flex:1;
+    padding:10px;
+    border-radius:12px;
+    border:1px solid var(--accent);
+    background:transparent;
+    color:var(--accent);
+    font-weight:600;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.amount-box button:hover{
+    background:var(--accent);
+    color:#022c22;
+}
+
+.notice{
+    display:none;
+    margin-top:16px;
+    padding:14px;
+    background:rgba(239,68,68,.15);
+    border:1px solid var(--danger);
+    color:#fecaca;
+    border-radius:14px;
+    font-size:14px;
+    animation:shake .4s;
+}
+
+@keyframes shake{
+    0%{transform:translateX(0)}
+    25%{transform:translateX(-5px)}
+    50%{transform:translateX(5px)}
+    75%{transform:translateX(-5px)}
+    100%{transform:translateX(0)}
+}
+
+.actions{
+    display:flex;
+    gap:12px;
+    margin-top:20px;
+}
+
+.actions button{
+    flex:1;
+    padding:14px;
+    border-radius:16px;
+    border:none;
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+}
+
+.clear{
+    background:#1f2937;
+    color:#e5e7eb;
+}
+
+.withdraw{
+    background:var(--accent);
+    color:#022c22;
+}
+
+.withdraw i{
+    margin-right:6px;
+}
+
+.footer{
+    text-align:center;
+    margin-top:18px;
+    font-size:12px;
+    color:var(--muted);
+}
+
+/* Mobile optimization */
+@media(max-width:480px){
+    .card{margin:14px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <div class="header">
+        <i class="fa-solid fa-building-columns"></i>
+        <h2>Bank Withdrawal</h2>
+    </div>
+
+    <label>Destination Bank</label>
+    <select id="bank">
+        <option>Esewa</option>
+        <option>LAXMI SUNRISE BANK LTD.</option>
+        <option>NABIL BANK</option>
+        <option>NIC ASIA BANK</option>
+        <option>GLOBAL IME BANK</option>
+        <option>PRIME COMMERCIAL BANK</option>
+        <option>EVEREST BANK</option>
+        <option>etc</option>
+    </select>
+
+    <label>Account Number</label>
+    <input type="text" placeholder="Enter account number">
+
+    <label>Account Holder Name</label>
+    <input type="text" placeholder="Full name">
+
+    <label>Withdrawal Amount (NPR)</label>
+    <input type="number" id="amount" placeholder="4500 - 50000">
+
+    <div class="amount-box">
+        <button onclick="setAmount(5000)">5000</button>
+        <button onclick="setAmount(10000)">10000</button>
+        <button onclick="setAmount(25000)">25000</button>
+        <button onclick="setAmount(50000)">50000</button>
+    </div>
+
+    <div class="notice" id="notice">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        You don’t have enough balance.
+    </div>
+
+    <div class="actions">
+        <button class="clear" onclick="clearForm()">Clear</button>
+        <button class="withdraw" onclick="withdraw()">
+            <i class="fa-solid fa-money-bill-transfer"></i> Withdraw
+        </button>
+    </div>
+
+    <div class="footer">
+        🔒 Secure & Encrypted Transaction
+    </div>
+</div>
+
+<script>
+function setAmount(val){
+    document.getElementById("amount").value = val;
+}
+
+function clearForm(){
+    document.querySelectorAll("input").forEach(i=>i.value="");
+    document.getElementById("notice").style.display="none";
+}
+
+function withdraw(){
+    const amount = Number(document.getElementById("amount").value);
+    const notice = document.getElementById("notice");
+
+    if(amount < 4500 || amount > 50000){
+        notice.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> Withdrawal limit is 4,500 – 50,000 NPR.';
+        notice.style.display="block";
+        return;
+    }
+
+    // Always show insufficient balance as requested
+    notice.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> You don’t have enough balance.';
+    notice.style.display="block";
+}
+</script>
+
+</body>
+</html>
