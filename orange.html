@@ -1,248 +1,183 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Withdrawal Process</title>
-
-<style>
-
-/* ====== GLOBAL STYLE ====== */
-body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background: #f3f6fa;
-    color: #222;
-}
-
-header {
-    background: #1a73e8;
-    color: white;
-    padding: 18px;
-    text-align: center;
-    font-size: 26px;
-    font-weight: bold;
-    letter-spacing: 1px;
-    box-shadow: 0px 2px 10px rgba(0,0,0,0.2);
-}
-
-/* ====== MAIN CONTAINER ====== */
-.container {
-    width: 92%;
-    max-width: 900px;
-    margin: 25px auto;
-    background: white;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
-}
-
-/* ===== BALANCE BOX ===== */
-.balance-box {
-    background: #1a73e8;
-    color: white;
-    padding: 20px;
-    border-radius: 10px;
-    font-size: 22px;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-/* ===== TABLE ===== */
-.table-box {
-    margin-top: 20px;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 8px;
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-table thead {
-    background: #1a73e8;
-    color: white;
-}
-
-table th, table td {
-    padding: 14px;
-    text-align: center;
-    border-bottom: 1px solid #ddd;
-}
-
-table tr:hover {
-    background: #f1f1f1;
-}
-
-/* ===== QR SECTION ===== */
-.qr-section {
-    text-align: center;
-    margin-top: 30px;
-    padding: 20px;
-    border: 2px dashed #1a73e8;
-    border-radius: 12px;
-}
-
-.qr-section img {
-    width: 180px;
-    margin-bottom: 12px;
-}
-
-/* ===== FILE UPLOAD ===== */
-.upload-box {
-    margin-top: 20px;
-    padding: 20px;
-    border: 2px solid #1a73e8;
-    border-radius: 12px;
-    text-align: center;
-}
-
-input[type="file"] {
-    margin-top: 10px;
-}
-
-/* ===== CONFIRMATION MESSAGE ===== */
-#confirmationMessage {
-    display: none;
-    text-align: center;
-    color: #e67e22;
-    font-size: 20px;
-    margin-top: 20px;
-    font-weight: bold;
-}
-
-/* ===== FORM ===== */
-.form-section {
-    margin-top: 30px;
-}
-
-input[type="text"], input[type="number"] {
-    width: 100%;
-    padding: 12px;
-    margin-top: 8px;
-    border-radius: 8px;
-    border: 1px solid #bbb;
-    font-size: 16px;
-}
-
-button {
-    width: 100%;
-    padding: 14px;
-    background: #1a73e8;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    margin-top: 16px;
-    font-size: 18px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-button:hover {
-    background: #0c56c2;
-}
-
-</style>
-
-</head>
-<body>
-
-<header>Withdrawal Process</header>
-
-<div class="container">
-
-    <!-- BALANCE -->
-    <div class="balance-box">
-        Total Earning Balance : <b>NPR Rs 4500/-</b>
-    </div>
-
-    <!-- TABLE -->
-    <div class="table-box">
-        <h2>Withdraw Amount List</h2>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>Pay Amount</th>
-                    <th>You Will Get (NPR)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr><td>3500</td><td>8590 /-</td></tr>
-                <tr><td>4500</td><td>11238 /-</td></tr>
-                <tr><td>5300</td><td>16330 /-</td></tr>
-            </tbody>
-        </table>
-    </div>
-
-    <!-- QR SECTION -->
-    <div class="qr-section">
-        <h2>Scan & Pay</h2>
-        <p>Scan the QR to complete your payment</p>
-
-        <!-- Replace with your QR image -->
-        <img src="your-bank-qr.png" alt="QR Code">
-
-        <p>After payment, upload your payment screenshot below</p>
-    </div>
-
-    <!-- Screenshot Upload -->
-    <div class="upload-box">
-        <h3>Upload Payment Screenshot</h3>
-        <input type="file" id="screenshotInput" accept="image/*">
-    </div>
-
-    <div id="confirmationMessage">Waiting for Confirmation... Please wait 2 minutes.</div>
-
-    <!-- FORM SECTION -->
-    <div class="form-section">
-        <h2>Withdraw Your Money</h2>
-
-        <label>Enter Bank / Wallet Name</label>
-        <input type="text" id="bankName" placeholder="eSewa, Khalti, Bank, etc">
-
-        <label>Enter Account Number</label>
-        <input type="text" id="acNumber" placeholder="Enter your A/C or Wallet Number">
-
-        <label>Enter Amount</label>
-        <input type="number" id="amount" placeholder="Enter withdraw amount">
-
-        <button onclick="withdrawNow()">Withdraw Now</button>
-    </div>
-
-</div>
-
-<script>
-
-/* ====== SHOW CONFIRMATION AFTER UPLOADING SCREENSHOT ====== */
-document.getElementById("screenshotInput").addEventListener("change", () => {
-    document.getElementById("confirmationMessage").style.display = "block";
-
-    setTimeout(() => {
-        document.getElementById("confirmationMessage").innerText = 
-        "Screenshot Received ✔ Waiting for final approval...";
-    }, 2000);
-});
-
-/* ====== WITHDRAW BUTTON ACTION ====== */
-function withdrawNow() {
-    let bank = document.getElementById("bankName").value;
-    let ac = document.getElementById("acNumber").value;
-    let amount = document.getElementById("amount").value;
-
-    if (bank === "" || ac === "" || amount === "") {
-        alert("Please fill all fields!");
-        return;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Withdraw Money - Growup Trading</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    document.getElementById("confirmationMessage").style.display = "block";
-    document.getElementById("confirmationMessage").innerText = 
-    "Processing Withdrawal... Waiting for Confirmation...";
-}
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #2e8b57, #1e3c72);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
 
-</script>
+    .container {
+      background: #fff;
+      padding: 35px 40px;
+      border-radius: 12px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      width: 100%;
+      max-width: 400px;
+      animation: fadeIn 0.7s ease;
+    }
 
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    h1 {
+      text-align: center;
+      color: #2e8b57;
+      margin-bottom: 5px;
+    }
+
+    .subheading {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #555;
+      font-size: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    input[type="text"],
+    input[type="number"] {
+      width: 100%;
+      padding: 10px 12px;
+      margin-bottom: 20px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      font-size: 15px;
+      transition: 0.3s;
+    }
+
+    input:focus {
+      border-color: #2e8b57;
+      outline: none;
+      box-shadow: 0 0 5px rgba(46, 139, 87, 0.3);
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #2e8b57;
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #256d48;
+    }
+
+    .notice {
+      margin-top: 20px;
+      padding: 14px;
+      border-radius: 8px;
+      font-weight: bold;
+      text-align: center;
+      display: none;
+    }
+
+    .notice.success {
+      color: #155724;
+      background-color: #d4edda;
+      border: 1px solid #c3e6cb;
+    }
+
+    .notice.error {
+      color: #721c24;
+      background-color: #f8d7da;
+      border: 1px solid #f5c6cb;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Withdraw Money</h1>
+    <p class="subheading">Growup Trading</p>
+
+    <form id="withdrawForm">
+      <label for="name">Account Holder Name:</label>
+      <input type="text" id="name" name="name" placeholder="John Doe" required />
+
+      <label for="accountNumber">Account Number:</label>
+      <input type="text" id="accountNumber" name="accountNumber" placeholder="1234567890" required />
+
+      <label for="amount">Withdraw Amount (₹):</label>
+      <input type="number" id="amount" name="amount" placeholder="4500 - 50000" required />
+
+      <button type="submit">Submit</button>
+    </form>
+
+    <div id="notice" class="notice"></div>
+  </div>
+
+  <script>
+    const form = document.getElementById('withdrawForm');
+    const notice = document.getElementById('notice');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const name = form.name.value.trim();
+      const accountNumber = form.accountNumber.value.trim();
+      const amount = parseFloat(form.amount.value);
+
+      if (name === '' || accountNumber === '') {
+        showNotice('Please fill in all required fields.', 'error');
+        return;
+      }
+
+      if (isNaN(amount)) {
+        showNotice('Please enter a valid amount.', 'error');
+        return;
+      }
+
+      if (amount < 2500) {
+        showNotice('Minimum withdrawal amount is ₹4,500.', 'error');
+        return;
+      }
+
+      if (amount > 50000) {
+        showNotice('Maximum withdrawal amount is ₹50,000.', 'error');
+        return;
+      }
+
+      showNotice(Notice: You have enough balance. You can withdraw ₹${amount.toLocaleString()}., 'success');
+    });
+
+    function showNotice(message, type) {
+      notice.textContent = message;
+      notice.className = 'notice ' + type;
+      notice.style.display = 'block';
+    }
+  </script>
 </body>
+
 </html>
