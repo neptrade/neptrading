@@ -161,6 +161,7 @@
         maxlength="20"
         aria-required="true"
         aria-invalid="false"
+        aria-describedby="errorMsg"
       />
       <button type="submit" aria-label="Login with Package ID">Login</button>
     </form>
@@ -168,7 +169,7 @@
     <div id="errorMsg" class="error-message" role="alert" aria-live="assertive"></div>
 
     <p class="note">
-      If you don't have a package ID, Please buy a package
+      If you don't have a package ID, please buy a package.
     </p>
   </main>
 
@@ -180,7 +181,7 @@
     const validPackageId = 'Nep470';
     const storageKey = 'savedPackageId';
 
-    // On page load, check if package ID is saved
+    // On page load: autofill & redirect if saved and valid
     window.addEventListener('DOMContentLoaded', () => {
       const savedId = localStorage.getItem(storageKey);
       if (savedId && savedId.toLowerCase() === validPackageId.toLowerCase()) {
@@ -190,7 +191,7 @@
         form.querySelector('button').textContent = 'Redirecting...';
         errorMsg.textContent = '';
         setTimeout(() => {
-          window.location.href = 'another.html';
+          window.location.href = 'dash.html';
         }, 1200);
       }
     });
@@ -199,7 +200,6 @@
       e.preventDefault();
       const val = input.value.trim();
 
-      // Reset error state
       errorMsg.textContent = '';
       input.setAttribute('aria-invalid', 'false');
 
@@ -209,15 +209,12 @@
       }
 
       if (val.toLowerCase() === validPackageId.toLowerCase()) {
-        // Save to localStorage
+        // Save ID and redirect
         localStorage.setItem(storageKey, val);
-
-        // Disable inputs & button
         input.disabled = true;
         form.querySelector('button').disabled = true;
         form.querySelector('button').textContent = 'Logging in...';
 
-        // Redirect after short delay
         setTimeout(() => {
           window.location.href = 'dash.html';
         }, 800);
@@ -235,4 +232,3 @@
 </script>
 </body>
 </html>
-
