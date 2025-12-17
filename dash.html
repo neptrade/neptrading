@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>WineX Trading - Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0f1724; --card:#0b1220; --accent:#7c3aed; --muted:#94a3b8; --glass: rgba(255,255,255,0.03);
+      --success:#10b981; --danger:#ef4444; --gold:#f59e0b;
+      --max-width:1100px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:'Poppins',system-ui,Segoe UI,Roboto,'Helvetica Neue',Arial;background:linear-gradient(180deg,#071025 0%, #071627 60%);color:#e6eef8}
+    .wrap{max-width:var(--max-width);margin:30px auto;padding:22px}
+
+    /* header */
+    header{display:flex;align-items:center;justify-content:center;position:relative;padding:18px 0}
+    .logo{width:120px;height:120px;border-radius:20px;background:linear-gradient(135deg,var(--accent),#5eead4);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:24px;color:#061226;box-shadow:0 8px 30px rgba(124,58,237,0.18), inset 0 -6px 30px rgba(255,255,255,0.06)}
+    h1.site-title{margin:12px 0 0 0;font-size:20px;text-align:center;letter-spacing:1px}
+
+    /* profile */
+    .profile{position:absolute;left:12px;top:6px;text-align:center}
+    .profile .avatar{width:60px;height:60px;border-radius:12px;background:linear-gradient(135deg,#ffd166,#ef476f);display:flex;align-items:center;justify-content:center;font-weight:700;color:#082032;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,0.5)}
+    .profile small{display:block;margin-top:6px;color:var(--muted);font-size:13px}
+    .profile .level{font-size:12px;margin-top:4px;color:#c7d2fe}
+
+    /* dashboard summary boxes */
+    .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:22px}
+    .card{background:var(--card);padding:16px;border-radius:14px;box-shadow:0 6px 20px rgba(2,6,23,0.7);border:1px solid rgba(255,255,255,0.03)}
+    .card h3{margin:0;font-size:13px;color:var(--muted)}
+    .card p{margin:10px 0 0;font-size:18px;font-weight:700}
+    .btn{display:inline-block;padding:10px 16px;border-radius:10px;background:var(--accent);color:#071226;font-weight:600;text-decoration:none;cursor:pointer}
+
+    /* invest table */
+    .invest-wrap{margin-top:28px;border-radius:14px;padding:18px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));backdrop-filter:blur(4px)}
+    .invest-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+    .plan{background:var(--glass);padding:14px;border-radius:12px;position:relative;border:1px solid rgba(255,255,255,0.03)}
+    .plan .price{font-weight:700;margin-top:8px}
+    .plan .meta{font-size:13px;color:var(--muted);margin-top:6px}
+    .hot{position:absolute;right:10px;top:10px;background:var(--gold);color:#071226;padding:6px 8px;border-radius:8px;font-weight:700;font-size:12px}
+
+    /* games & ads */
+    .section{margin-top:28px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .box{padding:14px;border-radius:12px;background:var(--card);}
+    .game-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .game{height:120px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));position:relative;display:flex;align-items:center;justify-content:center;flex-direction:column}
+    .locked-overlay{position:absolute;inset:0;background:linear-gradient(180deg, rgba(2,6,23,0.6), rgba(2,6,23,0.6));display:flex;align-items:center;justify-content:center;border-radius:10px;font-weight:700}
+
+    /* responsive */
+    @media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}.invest-grid{grid-template-columns:repeat(2,1fr)}.section{grid-template-columns:1fr}}
+    @media(max-width:520px){.grid{grid-template-columns:1fr}.invest-grid{grid-template-columns:1fr}.logo{width:92px;height:92px}.profile{left:8px}.wrap{padding:12px}}
+
+    /* modal & utilities */
+    .modal{position:fixed;inset:0;background:rgba(2,6,23,0.6);display:flex;align-items:center;justify-content:center;z-index:50;visibility:hidden;opacity:0;transition:all .18s}
+    .modal.show{visibility:visible;opacity:1}
+    .modal .dialog{background:linear-gradient(180deg,#071225,#0b1522);padding:18px;border-radius:12px;max-width:420px;width:90%;text-align:center;border:1px solid rgba(255,255,255,0.04)}
+    .tiny{font-size:13px;color:var(--muted)}
+
+    footer{margin-top:28px;text-align:center;color:var(--muted);font-size:13px}
+
+    /* subtle animation */
+    .pulse{animation:pulse 2.4s infinite}
+    @keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.02)}100%{transform:scale(1)}}
+
+    /* sticker */
+    .badge{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.04);font-weight:700;margin-left:8px}
+
+    /* dev control - hidden small */
+    .dev{position:fixed;right:12px;bottom:12px;background:rgba(255,255,255,0.04);padding:8px;border-radius:10px}
+
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="profile" role="button" aria-label="Profile" tabindex="0">
+        <div class="avatar" id="profileBtn">W</div>
+        <small id="userid">UserID - WIX456</small>
+        <div class="level" id="userLevel">Level 1</div>
+      </div>
+
+      <div style="text-align:center">
+        <div class="logo" aria-hidden="true">W X</div>
+        <h1 class="site-title">&lt; WineX Trading &gt;</h1>
+      </div>
+    </header>
+
+    <!-- dashboard summary -->
+    <div class="grid">
+      <div class="card">
+        <h3>Available Balance</h3>
+        <p id="available">NPR Rs. 0</p>
+      </div>
+      <div class="card">
+        <h3>Withdrawn Amount</h3>
+        <p id="withdrawn">NPR Rs. 0</p>
+      </div>
+      <div class="card">
+        <h3>Today's Earning</h3>
+        <p id="today">NPR Rs. 0</p>
+      </div>
+      <div class="card">
+        <h3>Invest Amount</h3>
+        <p id="investAmt">NPR Rs. 0</p>
+      </div>
+    </div>
+
+    <div style="margin-top:14px;display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+      <a href="withdraw.html" class="btn" id="withdrawNow">Withdraw Now</a>
+      <span class="badge">Verified by Play Protect @winextrading</span>
+    </div>
+
+    <!-- invest plans -->
+    <section class="invest-wrap">
+      <h2 style="margin:0 0 10px 0">Investment Plans</h2>
+      <div class="invest-grid">
+        <!-- plan items -->
+        <div class="plan">
+          <div style="font-size:13px;color:var(--muted)">Invest</div>
+          <div class="price">Npr rs.880/-</div>
+          <div class="meta">Profit Npr rs.1428/- &middot; Time - 10 min</div>
+          <div style="margin-top:10px"><button class="btn investBtn" data-amount="880">Invest Now</button></div>
+        </div>
+
+        <div class="plan">
+          <div style="font-size:13px;color:var(--muted)">Invest</div>
+          <div class="price">Npr rs.1500/-</div>
+          <div class="meta">Profit Npr rs.2385/- &middot; Time - 17 min</div>
+          <div style="margin-top:10px"><button class="btn investBtn" data-amount="1500">Invest Now</button></div>
+        </div>
+
+        <div class="plan">
+          <div style="font-size:13px;color:var(--muted)">Invest</div>
+          <div class="price">Npr rs.2500/-</div>
+          <div class="meta">Profit Npr rs.3690/- &middot; Time - 15 min</div>
+          <div style="margin-top:10px"><button class="btn investBtn" data-amount="2500">Invest Now</button></div>
+        </div>
+
+        <div class="plan">
+          <div class="hot">HOT</div>
+          <div style="font-size:13px;color:var(--muted)">Invest</div>
+          <div class="price">Npr rs.4500/-</div>
+          <div class="meta">Profit Npr rs.7600/- &middot; Time - 10 min</div>
+          <div style="margin-top:10px"><button class="btn investBtn" data-amount="4500">Invest Now</button></div>
+        </div>
+
+        <div class="plan">
+          <div style="font-size:13px;color:var(--muted)">Invest</div>
+          <div class="price">Npr rs.5500/-</div>
+          <div class="meta">Profit Npr rs.8890/- &middot; Time - 8 min</div>
+          <div style="margin-top:10px"><button class="btn investBtn" data-amount="5500">Invest Now</button></div>
+        </div>
+
+        <div class="plan">
+          <div class="hot">HOT</div>
+          <div style="font-size:13px;color:var(--muted)">Invest</div>
+          <div class="price">Npr rs.9500/-</div>
+          <div class="meta">Profit Npr rs.18790/- &middot; Time - 10 min</div>
+          <div style="margin-top:10px"><button class="btn investBtn" data-amount="9500">Invest Now</button></div>
+        </div>
+
+        <div class="plan">
+          <div class="hot">HOT</div>
+          <div style="font-size:13px;color:var(--muted)">Invest</div>
+          <div class="price">Npr rs.12000/-</div>
+          <div class="meta">Profit Npr rs.20790/- &middot; Time - 10 min</div>
+          <div style="margin-top:10px"><button class="btn investBtn" data-amount="12000">Invest Now</button></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- games and ads -->
+    <div class="section">
+      <div class="box">
+        <h3>Play & Earn</h3>
+        <div class="game-grid" style="margin-top:10px">
+          <div class="game">
+            <div>Game 1</div>
+            <div class="tiny">Daily reward</div>
+            <div class="locked-overlay">Locked</div>
+            <div style="position:absolute;bottom:12px"><button class="btn lockedBtn">Play & Earn</button></div>
+          </div>
+          <div class="game">
+            <div>Game 2</div>
+            <div class="tiny">Daily reward</div>
+            <div class="locked-overlay">Locked</div>
+            <div style="position:absolute;bottom:12px"><button class="btn lockedBtn">Play & Earn</button></div>
+          </div>
+          <div class="game">
+            <div>Game 3</div>
+            <div class="tiny">Daily reward</div>
+            <div class="locked-overlay">Locked</div>
+            <div style="position:absolute;bottom:12px"><button class="btn lockedBtn">Play & Earn</button></div>
+          </div>
+          <div class="game">
+            <div>Game 4</div>
+            <div class="tiny">Daily reward</div>
+            <div class="locked-overlay">Locked</div>
+            <div style="position:absolute;bottom:12px"><button class="btn lockedBtn">Play & Earn</button></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="box">
+        <h3>Watch Ads & Earn</h3>
+        <p class="tiny">Earn upto Rs.190 per video</p>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px">
+          <div style="height:80px;border-radius:8px;position:relative;background:var(--glass);display:flex;align-items:center;justify-content:center">Ad 1<div class="locked-overlay">Locked</div></div>
+          <div style="height:80px;border-radius:8px;position:relative;background:var(--glass);display:flex;align-items:center;justify-content:center">Ad 2<div class="locked-overlay">Locked</div></div>
+          <div style="height:80px;border-radius:8px;position:relative;background:var(--glass);display:flex;align-items:center;justify-content:center">Ad 3<div class="locked-overlay">Locked</div></div>
+          <div style="height:80px;border-radius:8px;position:relative;background:var(--glass);display:flex;align-items:center;justify-content:center">Ad 4<div class="locked-overlay">Locked</div></div>
+          <div style="height:80px;border-radius:8px;position:relative;background:var(--glass);display:flex;align-items:center;justify-content:center">Ad 5<div class="locked-overlay">Locked</div></div>
+          <div style="height:80px;border-radius:8px;position:relative;background:var(--glass);display:flex;align-items:center;justify-content:center">Ad 6<div class="locked-overlay">Locked</div></div>
+        </div>
+        <div style="margin-top:12px"><button class="btn lockedBtn">Watch & Earn</button></div>
+      </div>
+    </div>
+
+    <footer>More features will be unlocked after reaching Level 2 — <span style="font-weight:700">Verified by Play Protect @winextrading</span></footer>
+
+  </div>
+
+  <!-- modal -->
+  <div class="modal" id="modal">
+    <div class="dialog">
+      <h3 id="modalTitle">Locked</h3>
+      <p id="modalMsg" class="tiny">This feature will be unlocked after reaching Level 2.</p>
+      <div style="margin-top:12px"><button class="btn" id="modalClose">Okay</button></div>
+    </div>
+  </div>
+
+  <!-- small dev control to simulate level up (remove in production) -->
+  <div class="dev">
+    <div style="font-size:12px;color:var(--muted);margin-bottom:6px">Dev controls</div>
+    <button id="levelUpDev" class="btn" style="padding:6px 8px;font-size:13px">Level Up</button>
+    <button id="levelResetDev" class="btn" style="padding:6px 8px;font-size:13px;margin-left:6px">Reset</button>
+  </div>
+
+  <script>
+    // Initial demo values
+    const state = {
+      userid: 'WIX456',
+      level: parseInt(localStorage.getItem('wx_level')||'1',10),
+      balance: 1250,
+      withdrawn: 420,
+      today: 150,
+      investAmt: 5500
+    }
+
+    // hydrate UI
+    document.getElementById('userid').textContent = 'UserID - ' + state.userid
+    document.getElementById('userLevel').textContent = 'Level ' + state.level
+    document.getElementById('available').textContent = 'NPR Rs. ' + numberWithCommas(state.balance)
+    document.getElementById('withdrawn').textContent = 'NPR Rs. ' + numberWithCommas(state.withdrawn)
+    document.getElementById('today').textContent = 'NPR Rs. ' + numberWithCommas(state.today)
+    document.getElementById('investAmt').textContent = 'NPR Rs. ' + numberWithCommas(state.investAmt)
+
+    function numberWithCommas(x){return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g,",")}
+
+    // modal helpers
+    const modal = document.getElementById('modal')
+    const modalTitle = document.getElementById('modalTitle')
+    const modalMsg = document.getElementById('modalMsg')
+    document.getElementById('modalClose').addEventListener('click', ()=>{closeModal()})
+    function openModal(title,msg){modalTitle.textContent=title;modalMsg.textContent=msg;modal.classList.add('show')}
+    function closeModal(){modal.classList.remove('show')}
+
+    // profile click - shows locked until level 2
+    document.getElementById('profileBtn').addEventListener('click', ()=>{
+      if(state.level < 2){
+        openModal('Profile Locked','Profile access is locked. Reach Level 2 to unlock your full profile.')
+      } else {
+        openModal('Profile Unlocked','Welcome! Your profile is unlocked. You can access extra features now.')
+      }
+    })
+
+    // invest button behavior -> redirect to WhatsApp with prefilled message
+    Array.from(document.querySelectorAll('.investBtn')).forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const amount = btn.dataset.amount
+        const message = `I want to invest in WineX Trading, Amount: Npr rs ${amount}, My User ID - ${state.userid}.`
+        const wa = `https://wa.me/9779704888854?text=${encodeURIComponent(message)}`
+        window.open(wa,'_blank')
+      })
+    })
+
+    // locked buttons for games & ads
+    Array.from(document.querySelectorAll('.lockedBtn')).forEach(b=>b.addEventListener('click', ()=>{
+      if(state.level < 2){
+        openModal('Locked','This feature is locked. It will be unlocked after you reach Level 2.')
+      } else {
+        openModal('Unlocked','Nice! This feature is available for you.')
+      }
+    }))
+
+    // dev controls to simulate leveling (for testing) - remove for production
+    document.getElementById('levelUpDev').addEventListener('click', ()=>{
+      state.level = 2
+      localStorage.setItem('wx_level','2')
+      document.getElementById('userLevel').textContent = 'Level ' + state.level
+      // remove all locked overlays
+      document.querySelectorAll('.locked-overlay').forEach(n=>{n.style.display='none'})
+      openModal('Level Up','Congratulations! You reached Level 2. New features unlocked.')
+    })
+    document.getElementById('levelResetDev').addEventListener('click', ()=>{
+      state.level = 1
+      localStorage.setItem('wx_level','1')
+      document.getElementById('userLevel').textContent = 'Level ' + state.level
+      document.querySelectorAll('.locked-overlay').forEach(n=>{n.style.display='flex'})
+      openModal('Reset','Level has been reset to 1 for demo purposes.')
+    })
+
+    // on load hide locked overlays if level>=2
+    if(state.level >= 2){ document.querySelectorAll('.locked-overlay').forEach(n=>{n.style.display='none'}) }
+
+    // accessibility: close modal with escape
+    document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeModal() })
+
+    // progressive enhancement: update small UI animations
+  </script>
+</body>
+</html>
