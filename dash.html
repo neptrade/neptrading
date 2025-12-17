@@ -1,556 +1,327 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>&lt; Nep x Trading &gt; — Your choice , your future be ready </title>
+<meta charset="UTF-8">
+<title>Nep X Trading</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
-  <!-- Chart.js CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-  <style>
-    :root{
-      --bg:#0f1724;
-      --card:#0b1220;
-      --accent:#4f46e5;
-      --muted:#94a3b8;
-      --glass: rgba(255,255,255,0.03);
-      --success: #10b981;
-      --danger: #ef4444;
-      --glass-2: rgba(255,255,255,0.02);
-      --glass-border: rgba(255,255,255,0.04);
-      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    }
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+body{
+    background:#0f172a;
+    color:#fff;
+}
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      background: linear-gradient(180deg, #071021 0%, #061329 100%);
-      color: #e6eef8;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      padding:20px;
-    }
+/* HEADER */
+header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px;
+    background:#020617;
+}
+header h1{
+    font-size:20px;
+    color:#22c55e;
+}
+.profile{
+    text-align:right;
+}
+.profile i{
+    font-size:26px;
+    cursor:pointer;
+    color:#facc15;
+}
+.profile small{
+    display:block;
+    font-size:12px;
+    opacity:0.8;
+}
 
-    .container{
-      max-width:1200px;
-      margin:0 auto;
-      display:grid;
-      grid-template-columns: 1fr;
-      gap:20px;
-    }
+/* DASHBOARD */
+.dashboard{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+    padding:15px;
+}
+.card{
+    background:linear-gradient(135deg,#1e293b,#020617);
+    padding:15px;
+    border-radius:12px;
+    box-shadow:0 0 12px rgba(0,0,0,.4);
+}
+.card h3{
+    font-size:14px;
+    opacity:.8;
+}
+.card p{
+    font-size:18px;
+    font-weight:600;
+    margin-top:6px;
+    color:#22c55e;
+}
 
-    header.top {
-      display:flex;
-      gap:16px;
-      align-items:center;
-      justify-content:space-between;
-      background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      padding:16px;
-      border-radius:14px;
-      border:1px solid var(--glass-border);
-      box-shadow: 0 6px 18px rgba(8,12,20,0.6);
-    }
+/* WITHDRAW */
+.withdraw{
+    padding:0 15px 15px;
+}
+.withdraw button{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:30px;
+    background:#22c55e;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+}
 
-    .brand{
-      display:flex;
-      gap:12px;
-      align-items:center;
-    }
-    .logo {
-      width:56px;
-      height:56px;
-      border-radius:12px;
-      background: linear-gradient(135deg, #a78bfa, #60a5fa);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-weight:800;
-      color:#061327;
-      font-size:20px;
-      box-shadow: 0 6px 18px rgba(79,70,229,0.12);
-    }
-    .heading h1{
-      margin:0;
-      font-size:18px;
-      letter-spacing:0.6px;
-    }
-    .heading p{margin:0;font-size:12px;color:var(--muted)}
+/* SECTION */
+section{
+    padding:15px;
+}
+section h2{
+    margin-bottom:10px;
+    font-size:18px;
+    color:#38bdf8;
+}
 
-    /* account card */
-    .account{
-      display:flex;
-      gap:12px;
-      align-items:center;
-    }
-    .acct-card{
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      padding:12px 16px;
-      border-radius:10px;
-      border:1px solid var(--glass-border);
-      display:flex;
-      gap:12px;
-      align-items:center;
-    }
-    .acct-card strong{display:block;font-size:14px}
-    .level{
-      background:linear-gradient(90deg,var(--accent),#06b6d4);
-      padding:6px 10px;
-      border-radius:8px;
-      color:white;
-      font-weight:600;
-      font-size:13px;
-      box-shadow:0 6px 18px rgba(79,70,229,0.12);
-    }
-    .btn{
-      background:var(--accent);
-      color:white;
-      padding:10px 14px;
-      border-radius:10px;
-      border:none;
-      font-weight:700;
-      cursor:pointer;
-      display:inline-flex;
-      gap:8px;
-      align-items:center;
-      text-decoration:none;
-    }
-    .btn.ghost{
-      background:transparent;
-      border:1px solid var(--glass-border);
-    }
+/* TABLE */
+.table{
+    background:#020617;
+    border-radius:12px;
+    overflow:hidden;
+}
+.row{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    padding:10px;
+    border-bottom:1px solid #1e293b;
+    font-size:13px;
+    align-items:center;
+}
+.row.header{
+    background:#1e293b;
+    font-weight:600;
+}
+.row button{
+    padding:6px;
+    border:none;
+    border-radius:6px;
+    background:#22c55e;
+    cursor:pointer;
+    font-size:12px;
+}
+.offer{
+    color:#facc15;
+    font-size:11px;
+}
 
-    /* dashboard grid */
-    .grid{
-      display:grid;
-      grid-template-columns: 1.3fr 1fr;
-      gap:20px;
-    }
+/* REFERRAL */
+.ref-box{
+    background:linear-gradient(135deg,#020617,#1e293b);
+    padding:15px;
+    border-radius:12px;
+}
+.ref-box input{
+    width:100%;
+    padding:10px;
+    border-radius:8px;
+    border:none;
+    margin-top:8px;
+}
+.ref-box button{
+    width:100%;
+    margin-top:10px;
+    padding:12px;
+    border:none;
+    border-radius:30px;
+    background:#38bdf8;
+    font-weight:600;
+}
 
-    .card{
-      background: linear-gradient(180deg, rgba(255,255,255,0.018), rgba(255,255,255,0.01));
-      padding:18px;
-      border-radius:14px;
-      border:1px solid var(--glass-border);
-      box-shadow: 0 8px 30px rgba(2,6,23,0.6);
-    }
+/* LEVEL 2 ADS */
+.ads{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+}
+.ad{
+    background:#020617;
+    padding:15px;
+    border-radius:12px;
+    text-align:center;
+    filter:blur(2px);
+    position:relative;
+}
+.ad i{
+    font-size:30px;
+    margin-bottom:8px;
+}
+.lock{
+    position:absolute;
+    top:10px;
+    right:10px;
+    color:#f87171;
+}
+.ad button{
+    margin-top:8px;
+    padding:6px 10px;
+    border:none;
+    border-radius:6px;
+    background:#64748b;
+    color:#fff;
+}
 
-    .kpi{
-      display:flex;
-      gap:14px;
-      align-items:center;
-      justify-content:space-between;
-    }
-    .kpi .left{
-      display:flex;
-      gap:12px;
-      align-items:center;
-    }
-    .kpi strong{font-size:20px}
-    .kpi .muted{color:var(--muted);font-size:13px}
+/* CHARTS */
+.chart{
+    background:#020617;
+    padding:15px;
+    border-radius:12px;
+    margin-bottom:10px;
+}
+.bar{
+    height:6px;
+    background:#22c55e;
+    border-radius:10px;
+    animation:grow 3s infinite alternate;
+}
+@keyframes grow{
+    from{width:30%;}
+    to{width:90%;}
+}
 
-    /* table */
-    .plan-table{
-      width:100%;
-      border-collapse:collapse;
-      margin-top:12px;
-      font-size:14px;
-    }
-    .plan-table thead th{
-      text-align:left;
-      padding:12px;
-      color:var(--muted);
-      font-size:13px;
-      border-bottom:1px dashed rgba(255,255,255,0.03);
-    }
-    .plan-table tbody td{
-      padding:12px;
-      border-bottom:1px dashed rgba(255,255,255,0.02);
-      vertical-align:middle;
-    }
-    .plan-row{
-      transition:transform .18s ease, background .18s;
-    }
-    .plan-row:hover{ transform: translateY(-4px); background: rgba(255,255,255,0.01);}
-
-    .pill { padding:6px 10px;border-radius:999px;font-size:13px;font-weight:700;background:var(--glass-2);border:1px solid var(--glass-border);display:inline-block;}
-    .offer{background: linear-gradient(90deg,#f97316,#f43f5e); color:white; padding:6px 10px;border-radius:10px;font-weight:700;font-size:12px;box-shadow:0 8px 24px rgba(244,63,94,0.12)}
-    .invest-btn{background:#06b6d4;color:#042026;padding:8px 12px;border-radius:10px;border:none;font-weight:700;cursor:pointer}
-
-    /* referral */
-    .share-options{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
-    .share-options a{display:inline-flex;align-items:center;gap:8px;padding:8px 10px;border-radius:10px;text-decoration:none;font-weight:700;border:1px solid var(--glass-border);background:transparent;color:var(--muted)}
-    .share-link{
-      display:flex;
-      gap:8px;
-      align-items:center;
-      justify-content:space-between;
-      margin-top:8px;
-      padding:10px;
-      border-radius:10px;
-      background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);
-      border:1px solid var(--glass-border);
-      font-size:13px;
-      color:var(--muted);
-    }
-
-    /* lists */
-    ul.checks{margin:0;padding:0;list-style:none}
-    ul.checks li{padding:8px 0;border-bottom:1px dashed rgba(255,255,255,0.02);display:flex;align-items:center;gap:10px}
-    .tick{background:var(--success);width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:white;font-weight:800}
-
-    /* badges */
-    .badge{
-      display:inline-block;
-      padding:6px 8px;
-      border-radius:10px;
-      background:rgba(255,255,255,0.03);
-      border:1px solid var(--glass-border);
-      font-weight:700;
-      font-size:12px;
-      color:var(--muted);
-    }
-
-    /* charts container */
-    .charts{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:12px;
-      margin-top:12px;
-    }
-
-    /* footer small */
-    footer{display:flex;align-items:center;justify-content:space-between;color:var(--muted);font-size:13px;padding-top:10px}
-
-    /* responsive */
-    @media (max-width:900px){
-      .grid{grid-template-columns:1fr}
-      .charts{grid-template-columns:1fr}
-      .container{padding:12px}
-      header.top{flex-direction:column;align-items:flex-start;gap:12px}
-    }
-
-  </style>
+/* FOOTER */
+footer{
+    padding:15px;
+    text-align:center;
+    font-size:12px;
+    opacity:.7;
+}
+</style>
 </head>
+
 <body>
-  <div class="container" role="main">
 
-    <!-- Header -->
-    <header class="top" role="banner">
-      <div class="brand" aria-hidden="false">
-        <div class="logo" aria-hidden="true">AT</div>
-        <div class="heading">
-          <h1>&lt; Nep X Trading &gt;</h1>
-          <p>earning platform </p>
-        </div>
-      </div>
+<header>
+    <h1>Nep X Trading</h1>
+    <div class="profile">
+        <i class="fa-solid fa-user-lock" onclick="profileNotice()"></i>
+        <small>Level 1</small>
+        <small>ID: nepuser30</small>
+    </div>
+</header>
 
-      <div class="account" aria-label="Account controls">
-        <div class="acct-card" aria-hidden="false">
-          <div>
-            <small class="muted">Account Number</small>
-            <strong>AT4500</strong>
-          </div>
-          <div>
-            <small class="muted">Account Level</small>
-            <div class="level" id="acct-level">Level 1</div>
-          </div>
-        </div>
+<div class="dashboard">
+    <div class="card"><h3>Total Earning</h3><p>Rs. 12,850</p></div>
+    <div class="card"><h3>Today Earning</h3><p>Rs. 850</p></div>
+    <div class="card"><h3>Weekly Earning</h3><p>Rs. 4,200</p></div>
+    <div class="card"><h3>Referral Earning</h3><p>Rs. 1,500</p></div>
+</div>
 
-        <a href="withdraw.html" class="btn" title="Withdraw">Withdraw</a>
-      </div>
-    </header>
+<div class="withdraw">
+    <button onclick="location.href='withdraw.html'">Withdraw Now</button>
+</div>
 
-    <!-- Main Grid -->
-    <section class="grid" aria-label="Dashboard area">
+<section>
+<h2>Trading Investments</h2>
+<div class="table">
+<div class="row header">
+    <div>Invest</div><div>Profit</div><div>Time</div><div>Action</div>
+</div>
 
-      <!-- Left column: KPI + Plans -->
-    
+<script>
+const plans=[
+[880,1428,"15 min",""],
+[1500,2385,"10 min",""],
+[2500,3235,"20 min",""],
+[3500,4885,"30 min",""],
+[5500,7160,"10 min","🔥 OFFER"],
+[8700,12385,"5 min","🔥 OFFER"],
+[9500,15292,"10 min","🔥 OFFER"]
+];
+plans.forEach(p=>{
+document.write(`
+<div class="row">
+<div>Rs.${p[0]}<br><span class="offer">${p[3]}</span></div>
+<div>Rs.${p[1]}</div>
+<div>${p[2]}</div>
+<div><button onclick="location.href='another.html'">Invest</button></div>
+</div>
+`);
+});
+</script>
+</div>
+</section>
 
-        <!-- Plans table -->
-        <h3 id="dash-title" style="margin-top:18px;margin-bottom:6px">Investment in Apple Trade</h3>
-        <p style="margin:0;color:var(--muted);font-size:13px">Select a plan and invest. Instant returns per plan timing.</p>
+<section>
+<h2>Earn with Referral</h2>
+<div class="ref-box">
+<p>Refer friends & earn <b>Rs.300</b> per person</p>
+<p>Your Referral Code: <b>D390</b></p>
+<input value="https://nepxtrading.com/ref/D390" readonly>
+<button onclick="share()">Refer Now</button>
+</div>
+</section>
 
-        <table class="plan-table" role="table" aria-label="Investment plans">
-          <thead>
-            <tr>
-              <th>Investment (NPR)</th>
-              <th>Profit (NPR)</th>
-              <th>Time</th>
-              <th style="text-align:right">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="plan-row">
-              <td>₨ 880</td>
-              <td>₨ 1,428</td>
-              <td>40 min</td>
-              <td style="text-align:right"><button class="invest-btn" data-invest="880">Invest Now</button></td>
-            </tr>
-            <tr class="plan-row">
-              <td>₨ 1,500</td>
-              <td>₨ 2,385</td>
-              <td>30 min</td>
-              <td style="text-align:right"><button class="invest-btn" data-invest="1500">Invest Now</button></td>
-            </tr>
-            <tr class="plan-row">
-              <td>₨ 2,500</td>
-              <td>₨ 5,690</td>
-              <td>45 min</td>
-              <td style="text-align:right"><button class="invest-btn" data-invest="2500">Invest Now</button></td>
-            </tr>
-            <tr class="plan-row">
-              <td>₨ 4,500</td>
-              <td>₨ 7,600</td>
-              <td>30 min</td>
-              <td style="text-align:right"><button class="invest-btn" data-invest="4500">Invest Now</button></td>
-            </tr>
-            <tr class="plan-row">
-              <td>₨ 5,500</td>
-              <td>₨ 10,890</td>
-              <td>38 min</td>
-              <td style="text-align:right"><button class="invest-btn" data-invest="5500">Invest Now</button></td>
-            </tr>
-            <tr class="plan-row">
-              <td>₨ 9,500 <span class="offer" style="margin-left:8px">HOT OFFER</span></td>
-              <td>₨ 18,790</td>
-              <td>60 min</td>
-              <td style="text-align:right"><button class="invest-btn" data-invest="9500">Invest Now</button></td>
-            </tr>
-            <tr class="plan-row">
-              <td>₨ 12,000 <span class="offer" style="margin-left:8px">LIMITED</span></td>
-              <td>₨ 20,790</td>
-              <td>60 min</td>
-              <td style="text-align:right"><button class="invest-btn" data-invest="12000">Invest Now</button></td>
-            </tr>
-          </tbody>
-        </table>
+<section>
+<h2>Level 2 – Watch Ads & Earn</h2>
+<p>Earn Rs.160 per ad (Locked)</p>
+<div class="ads">
+<div class="ad"><i class="fa-solid fa-play"></i><i class="fa-solid fa-lock lock"></i><button onclick="locked()">Watch & Earn</button></div>
+<div class="ad"><i class="fa-solid fa-play"></i><i class="fa-solid fa-lock lock"></i><button onclick="locked()">Watch & Earn</button></div>
+<div class="ad"><i class="fa-solid fa-play"></i><i class="fa-solid fa-lock lock"></i><button onclick="locked()">Watch & Earn</button></div>
+<div class="ad"><i class="fa-solid fa-play"></i><i class="fa-solid fa-lock lock"></i><button onclick="locked()">Watch & Earn</button></div>
+</div>
+</section>
 
-      </div>
+<section>
+<h2>Live Charts</h2>
+<div class="chart">Live Users <div class="bar"></div></div>
+<div class="chart">Bitcoin Price <div class="bar"></div></div>
+<div class="chart">Trading Profit <div class="bar"></div></div>
+</section>
 
-      <!-- Right column: Methods & Charts -->
-      <aside class="card" aria-label="Earning methods and charts">
-        <h3 style="margin-top:0">Earning Methods</h3>
+<section>
+<p>⚠ Other features will be unlocked after reaching <b>Level 2</b></p>
+<p>✅ Verified License | Secure Platform | Trusted in Nepal</p>
+</section>
 
-        <!-- Referral -->
-        <div style="margin-top:8px">
-          <div style="display:flex;justify-content:space-between;align-items:center">
-            <div>
-              <div style="font-weight:800">Referral</div>
-              <div class="muted" style="font-size:13px">Referral To Friends - Earn up to ₨ 300 per person</div>
-            </div>
-            <div class="pill">Code: <strong style="margin-left:8px">RF90</strong></div>
-          </div>
+<footer>
+© 2025 Nep X Trading | All Rights Reserved
+</footer>
 
-          <div class="share-options" role="toolbar" aria-label="share referral">
-            <button class="btn ghost" id="refer-btn">Refer / Share</button>
-          </div>
+<script>
+function profileNotice(){
+    alert("Profile will be unlocked at Level 2");
+}
+function locked(){
+    alert("This feature is available after Level 2");
+}
+function share(){
+    if(navigator.share){
+        navigator.share({
+            title:'Nep X Trading',
+            text:'Join & earn online in Nepal',
+            url:'https://nepxtrading.com/ref/D390'
+        });
+    }else{
+        alert("Copy and share the referral link manually");
+    }
+}
+</script>
 
-          <div class="share-link" id="share-box" style="display:none">
-            <div style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis" id="ref-link">https://neptrade.github.io/Ne/light.html</div>
-            <div style="margin-left:8px"><button class="btn ghost" id="copy-link">Copy</button></div>
-          </div>
-        </div>
-
-        <hr style="margin:12px 0;border-color:rgba(255,255,255,0.02)">
-
-        <!-- Affiliate -->
-        <div>
-          <div style="display:flex;justify-content:space-between;align-items:center">
-            <div>
-              <div style="font-weight:800">Affiliate Marketing</div>
-              <div class="muted" style="font-size:13px">Earn up to ₨ 5,000 per week</div>
-            </div>
-            <div class="badge">apple trade AM</div>
-          </div>
-
-          <ul class="checks" style="margin-top:10px">
-            <li><span class="tick">✓</span> <div><strong>Create a TikTok account</strong><div class="muted" style="font-size:12px">Post videos and engage people</div></div></li>
-            <li><span class="tick">✓</span> <div><strong>Join apple trade AM WhatsApp group</strong><div class="muted" style="font-size:12px">Get resources and scripts</div></div></li>
-            <li><span class="tick">✓</span> <div><strong>Post & engage</strong><div class="muted" style="font-size:12px">More views, more earnings</div></div></li>
-          </ul>
-        </div>
-
-        <!-- Charts -->
-        <div class="charts" aria-hidden="false">
-          <div class="card" style="padding:12px">
-            <div style="display:flex;justify-content:space-between;align-items:center">
-              <div><strong>Members (Live)</strong><div class="muted" style="font-size:12px">Total members on platform</div></div>
-              <div style="font-weight:800" id="live-members">9,500</div>
-            </div>
-            <canvas id="membersChart" style="height:180px;margin-top:8px"></canvas>
-          </div>
-
-          <div class="card" style="padding:12px">
-            <div style="display:flex;justify-content:space-between;align-items:center">
-              <div><strong>Bitcoin (Simulated)</strong><div class="muted" style="font-size:12px">Live price - simulated</div></div>
-              <div style="font-weight:800" id="btc-price">₨ 6,542,000</div>
-            </div>
-            <canvas id="btcChart" style="height:180px;margin-top:8px"></canvas>
-          </div>
-        </div>
-
-        <footer style="margin-top:12px">
-          <div>More update will be unlocked after level 2</div>
-          <div class="muted">© Apple Trade</div>
-        </footer>
-      </aside>
-
-    </section>
-  </div>
-
-  <script>
-    // ----- Utilities -----
-    function formatCurrency(n){ return n.toLocaleString('en-NP'); }
-
-    // ----- Member count & chart (simulate live) -----
-    const initialMembers = 9500;
-    let members = initialMembers;
-    const memberCtx = document.getElementById('membersChart').getContext('2d');
-    const memberData = {
-      labels: Array.from({length:20},(_,i)=> i===19? 'now': `-${19-i}m`),
-      datasets: [{ label:'Members', data: Array.from({length:20}, (_,i)=> initialMembers - (19-i)*5 ), fill:true, tension:0.3, backgroundColor: 'rgba(79,70,229,0.12)', borderColor: 'rgba(79,70,229,0.9)', pointRadius:0 }]
-    };
-    const membersChart = new Chart(memberCtx, {
-      type:'line',
-      data: memberData,
-      options:{
-        responsive:true,
-        plugins:{ legend:{display:false} },
-        scales:{
-          x:{ display:false },
-          y:{ display:false }
-        },
-        elements:{ point:{ radius:0 } },
-        animation: {duration:600}
-      }
-    });
-
-    // update simulated members every 2.5s
-    setInterval(()=>{
-      // small random increase
-      const delta = Math.floor(Math.random()*5);
-      members += delta;
-      memberData.datasets[0].data.shift();
-      memberData.datasets[0].data.push(members);
-      membersChart.update();
-      document.getElementById('member-count').textContent = formatCurrency(members);
-      document.getElementById('live-members').textContent = formatCurrency(members);
-    }, 2500);
-
-    // ----- Bitcoin (simulated random walk) -----
-    let btc = 6542000; // simulated starting price NPR
-    const btcCtx = document.getElementById('btcChart').getContext('2d');
-    const btcHistory = Array.from({length:20}, (_,i)=> btc - (19-i)*2000 );
-    const btcChart = new Chart(btcCtx, {
-      type:'line',
-      data:{ labels:Array(20).fill(''), datasets:[{data:btcHistory, fill:true, tension:0.25, backgroundColor:'rgba(6,182,212,0.08)', borderColor:'rgba(6,182,212,0.95)', pointRadius:0}]},
-      options:{ responsive:true, plugins:{legend:{display:false}}, scales:{x:{display:false}, y:{display:false}}, animation:{duration:300}}
-    });
-
-    setInterval(()=>{
-      // random walk: small percent change
-      const pct = (Math.random()-0.5)*0.01; // +-0.5%
-      btc = Math.max(100000, Math.round(btc * (1 + pct)));
-      btcChart.data.datasets[0].data.shift();
-      btcChart.data.datasets[0].data.push(btc);
-      btcChart.update();
-      document.getElementById('btc-price').textContent = '₨ ' + formatCurrency(btc);
-    }, 1800);
-
-    // ----- Invest buttons -> WhatsApp -----
-    const investBtns = document.querySelectorAll('.invest-btn');
-    investBtns.forEach(btn=>{
-      btn.addEventListener('click', ()=>{
-        const amt = btn.getAttribute('data-invest');
-        const number = '9779704888854'; // as provided
-        const message = encodeURIComponent('I want to invest in apple trade. Plan: NPR ' + amt);
-        // Use wa.me link (international format)
-        const url = `https://wa.me/${number}?text=${message}`;
-        window.open(url, '_blank');
-      });
-    });
-
-    // ----- Referral share logic -----
-    const referBtn = document.getElementById('refer-btn');
-    const shareBox = document.getElementById('share-box');
-    const refLinkEl = document.getElementById('ref-link');
-    const copyBtn = document.getElementById('copy-link');
-    // The user said "I will add link of my website" — so default placeholder:
-    const referralURL = 'https://neptrade.github.io/Ne/light.html';
-    refLinkEl.textContent = referralURL;
-
-    referBtn.addEventListener('click', async ()=>{
-      // Try native share
-      if(navigator.share){
-        try{
-          await navigator.share({
-            title: 'Join Apple Trade',
-            text: 'Join Apple Trade and earn. Use my code RF90',
-            url: referralURL
-          });
-        }catch(e){
-          // user cancelled or unavailable - fallback
-          shareBox.style.display = 'flex';
-        }
-      } else {
-        shareBox.style.display = shareBox.style.display === 'none' ? 'flex' : 'none';
-      }
-    });
-
-    copyBtn.addEventListener('click', ()=>{
-      navigator.clipboard?.writeText(referralURL).then(()=> {
-        copyBtn.textContent = 'Copied!';
-        setTimeout(()=> copyBtn.textContent = 'Copy', 1600);
-      }).catch(()=> {
-        alert('Copy this link: ' + referralURL);
-      });
-    });
-
-    // Also provide fallback social links inside share box (constructed on the fly)
-    // When user clicks the ref-link area open a small menu of social share:
-    refLinkEl.addEventListener('click', ()=>{
-      // open a simple prompt with share options (fallback)
-      const opts = [
-        {name:'WhatsApp', url: `https://wa.me/?text=${encodeURIComponent('Join Apple Trade: ' + referralURL + ' Code: RF90')}`},
-        {name:'Facebook', url: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(referralURL)}`},
-        {name:'Twitter', url: `https://twitter.com/intent/tweet?text=${encodeURIComponent('Join Apple Trade: ' + referralURL + ' Code: RF90')}`},
-        {name:'Copy', action:'copy'}
-      ];
-      // Simple chooser
-      const choice = prompt('Share via: WhatsApp / Facebook / Twitter / Copy\nType one of: whatsapp, facebook, twitter, copy');
-      if(!choice) return;
-      const c = choice.toLowerCase().trim();
-      if(c === 'copy'){ navigator.clipboard?.writeText(referralURL); alert('Link copied to clipboard'); return; }
-      const found = opts.find(o=> o.name.toLowerCase() === c);
-      if(found && found.url) window.open(found.url, '_blank');
-    });
-
-    // ----- Accessibility small improvements -----
-    document.querySelectorAll('button, a').forEach(el=>{
-      el.addEventListener('keydown', (e)=>{
-        if(e.key === 'Enter') el.click();
-      });
-    });
-
-    // ----- small simulated updates to main balance -----
-    let balance = 12450;
-    setInterval(()=>{
-      // if members increased maybe small earnings change
-      const delta = Math.floor(Math.random()*150) - 30;
-      balance = Math.max(0, balance + delta);
-      document.getElementById('main-balance').textContent = formatCurrency(balance);
-    }, 4500);
-
-  </script>
 </body>
 </html>
-
-
-
-
-
