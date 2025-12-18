@@ -3,245 +3,257 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Withdrawal Process</title>
+<title>Nepal Invest & Trade</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-
-/* ====== GLOBAL STYLE ====== */
-body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background: #f3f6fa;
-    color: #222;
+:root{
+  --primary:#1e88e5;
+  --secondary:#0d47a1;
+  --accent:#00c853;
+  --bg:#f5f7fb;
+  --text:#1f2937;
 }
 
-header {
-    background: #1a73e8;
-    color: white;
-    padding: 18px;
-    text-align: center;
-    font-size: 26px;
-    font-weight: bold;
-    letter-spacing: 1px;
-    box-shadow: 0px 2px 10px rgba(0,0,0,0.2);
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
 }
 
-/* ====== MAIN CONTAINER ====== */
-.container {
-    width: 92%;
-    max-width: 900px;
-    margin: 25px auto;
-    background: white;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+body{
+  background:var(--bg);
+  color:var(--text);
 }
 
-/* ===== BALANCE BOX ===== */
-.balance-box {
-    background: #1a73e8;
-    color: white;
-    padding: 20px;
-    border-radius: 10px;
-    font-size: 22px;
-    text-align: center;
-    margin-bottom: 20px;
+/* Header */
+header{
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+  color:#fff;
+  padding:20px;
+  text-align:center;
+  border-bottom-left-radius:25px;
+  border-bottom-right-radius:25px;
 }
 
-/* ===== TABLE ===== */
-.table-box {
-    margin-top: 20px;
+header h1{
+  font-size:1.6rem;
+  font-weight:700;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 8px;
-    border-radius: 10px;
-    overflow: hidden;
+header p{
+  font-size:0.9rem;
+  opacity:0.9;
 }
 
-table thead {
-    background: #1a73e8;
-    color: white;
+/* Container */
+.container{
+  padding:18px;
+  max-width:480px;
+  margin:auto;
 }
 
-table th, table td {
-    padding: 14px;
-    text-align: center;
-    border-bottom: 1px solid #ddd;
+/* Card */
+.card{
+  background:#fff;
+  border-radius:18px;
+  padding:18px;
+  margin-bottom:18px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.08);
 }
 
-table tr:hover {
-    background: #f1f1f1;
+/* Section Titles */
+.card h2{
+  font-size:1.1rem;
+  margin-bottom:10px;
 }
 
-/* ===== QR SECTION ===== */
-.qr-section {
-    text-align: center;
-    margin-top: 30px;
-    padding: 20px;
-    border: 2px dashed #1a73e8;
-    border-radius: 12px;
+/* Features */
+.features{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
 }
 
-.qr-section img {
-    width: 180px;
-    margin-bottom: 12px;
+.feature{
+  background:#f0f4ff;
+  border-radius:14px;
+  padding:12px;
+  text-align:center;
+  font-size:0.8rem;
 }
 
-/* ===== FILE UPLOAD ===== */
-.upload-box {
-    margin-top: 20px;
-    padding: 20px;
-    border: 2px solid #1a73e8;
-    border-radius: 12px;
-    text-align: center;
+.feature span{
+  font-size:1.4rem;
+  display:block;
 }
 
-input[type="file"] {
-    margin-top: 10px;
+/* QR */
+.qr-box{
+  text-align:center;
 }
 
-/* ===== CONFIRMATION MESSAGE ===== */
-#confirmationMessage {
-    display: none;
-    text-align: center;
-    color: #e67e22;
-    font-size: 20px;
-    margin-top: 20px;
-    font-weight: bold;
+.qr-box img{
+  width:200px;
+  max-width:100100%;
+  border-radius:14px;
+  margin:10px 0;
+  border:2px dashed var(--primary);
 }
 
-/* ===== FORM ===== */
-.form-section {
-    margin-top: 30px;
+/* Upload */
+.upload-box{
+  border:2px dashed #c7d2fe;
+  padding:16px;
+  border-radius:14px;
+  text-align:center;
 }
 
-input[type="text"], input[type="number"] {
-    width: 100%;
-    padding: 12px;
-    margin-top: 8px;
-    border-radius: 8px;
-    border: 1px solid #bbb;
-    font-size: 16px;
+.upload-box input{
+  display:none;
 }
 
-button {
-    width: 100%;
-    padding: 14px;
-    background: #1a73e8;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    margin-top: 16px;
-    font-size: 18px;
-    cursor: pointer;
-    transition: 0.3s;
+.upload-label{
+  display:inline-block;
+  padding:10px 16px;
+  background:var(--primary);
+  color:#fff;
+  border-radius:10px;
+  cursor:pointer;
+  font-size:0.85rem;
 }
 
-button:hover {
-    background: #0c56c2;
+.preview{
+  margin-top:12px;
 }
 
+.preview img{
+  max-width:100%;
+  border-radius:12px;
+}
+
+/* Button */
+button{
+  width:100%;
+  padding:14px;
+  background:var(--accent);
+  color:#fff;
+  border:none;
+  border-radius:14px;
+  font-size:1rem;
+  font-weight:600;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+button:hover{
+  opacity:0.9;
+}
+
+/* Status */
+.status{
+  text-align:center;
+  padding:20px;
+  display:none;
+}
+
+.status span{
+  font-size:2rem;
+  animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+  0%{opacity:0.4}
+  50%{opacity:1}
+  100%{opacity:0.4}
+}
+
+/* Footer */
+footer{
+  font-size:0.7rem;
+  text-align:center;
+  color:#6b7280;
+  padding:12px;
+}
 </style>
-
 </head>
 <body>
 
-<header>Withdrawal Process</header>
+<header>
+  <h1>📈 Nepal Invest & Trading</h1>
+  <p>Smart Investment • Agent-Handled Trading</p>
+</header>
 
 <div class="container">
 
-    <!-- BALANCE -->
-    <div class="balance-box">
-        Total Earning Balance : <b>NPR Rs 4500/-</b>
+  <div class="card">
+    <h2>✨ Platform Features</h2>
+    <div class="features">
+      <div class="feature"><span>🤝</span>Agent Managed Trades</div>
+      <div class="feature"><span>📱</span>Mobile Friendly</div>
+      <div class="feature"><span>🔒</span>Secure Process</div>
+      <div class="feature"><span>⚡</span>Fast Approval</div>
     </div>
+  </div>
 
-    <!-- TABLE -->
-    <div class="table-box">
-        <h2>Withdraw Amount List</h2>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>Pay Amount</th>
-                    <th>You Will Get (NPR)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr><td>3500</td><td>8590 /-</td></tr>
-                <tr><td>4500</td><td>11238 /-</td></tr>
-                <tr><td>5300</td><td>16330 /-</td></tr>
-            </tbody>
-        </table>
+  <div class="card">
+    <h2>💰 Invest via QR Payment</h2>
+    <div class="qr-box">
+      <p>Scan the QR & pay your investment amount</p>
+      <img src="YOUR_QR_IMAGE_HERE.png" alt="QR Code">
+      <p><strong>Currency:</strong> NPR (Nepal)</p>
     </div>
+  </div>
 
-    <!-- QR SECTION -->
-    <div class="qr-section">
-        <h2>Scan & Pay</h2>
-        <p>Scan the QR to complete your payment</p>
-
-        <!-- Replace with your QR image -->
-        <img src="your-bank-qr.png" alt="QR Code">
-
-        <p>After payment, upload your payment screenshot below</p>
-    </div>
-
-    <!-- Screenshot Upload -->
+  <div class="card" id="uploadSection">
+    <h2>📸 Upload Payment Screenshot</h2>
     <div class="upload-box">
-        <h3>Upload Payment Screenshot</h3>
-        <input type="file" id="screenshotInput" accept="image/*">
+      <label class="upload-label" for="fileInput">Choose Screenshot</label>
+      <input type="file" id="fileInput" accept="image/*">
+      <div class="preview" id="preview"></div>
     </div>
+    <br>
+    <button onclick="submitProof()">Submit for Approval</button>
+  </div>
 
-    <div id="confirmationMessage">Waiting for Confirmation... Please wait 2 minutes.</div>
-
-    <!-- FORM SECTION -->
-    <div class="form-section">
-        <h2>Withdraw Your Money</h2>
-
-        <label>Enter Bank / Wallet Name</label>
-        <input type="text" id="bankName" placeholder="eSewa, Khalti, Bank, etc">
-
-        <label>Enter Account Number</label>
-        <input type="text" id="acNumber" placeholder="Enter your A/C or Wallet Number">
-
-        <label>Enter Amount</label>
-        <input type="number" id="amount" placeholder="Enter withdraw amount">
-
-        <button onclick="withdrawNow()">Withdraw Now</button>
-    </div>
+  <div class="card status" id="statusBox">
+    <span>⏳</span>
+    <h2>Waiting for Agent Approval</h2>
+    <p>Please wait, our agent is verifying your payment.</p>
+  </div>
 
 </div>
 
+<footer>
+  ⚠️ Investment involves risk. Trading is handled by assigned agents.  
+</footer>
+
 <script>
+const fileInput = document.getElementById("fileInput");
+const preview = document.getElementById("preview");
 
-/* ====== SHOW CONFIRMATION AFTER UPLOADING SCREENSHOT ====== */
-document.getElementById("screenshotInput").addEventListener("change", () => {
-    document.getElementById("confirmationMessage").style.display = "block";
-
-    setTimeout(() => {
-        document.getElementById("confirmationMessage").innerText = 
-        "Screenshot Received ✔ Waiting for final approval...";
-    }, 2000);
+fileInput.addEventListener("change", function(){
+  const file = this.files[0];
+  if(file){
+    const reader = new FileReader();
+    reader.onload = function(){
+      preview.innerHTML = `<img src="${reader.result}">`;
+    }
+    reader.readAsDataURL(file);
+  }
 });
 
-/* ====== WITHDRAW BUTTON ACTION ====== */
-function withdrawNow() {
-    let bank = document.getElementById("bankName").value;
-    let ac = document.getElementById("acNumber").value;
-    let amount = document.getElementById("amount").value;
-
-    if (bank === "" || ac === "" || amount === "") {
-        alert("Please fill all fields!");
-        return;
-    }
-
-    document.getElementById("confirmationMessage").style.display = "block";
-    document.getElementById("confirmationMessage").innerText = 
-    "Processing Withdrawal... Waiting for Confirmation...";
+function submitProof(){
+  if(!fileInput.files.length){
+    alert("Please upload payment screenshot first.");
+    return;
+  }
+  document.getElementById("uploadSection").style.display="none";
+  document.getElementById("statusBox").style.display="block";
 }
-
 </script>
 
 </body>
