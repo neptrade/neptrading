@@ -1,555 +1,342 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>GrowUp Trading</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apple Trading | Nepal's Best Earning Platform</title>
 
-  <style>
-    /* Reset */
-    * {
-      margin: 0; padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-    body {
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-      color: white;
-      line-height: 1.6;
-    }
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+body{
+    background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+    color:#fff;
+}
 
-    header {
-      text-align: center;
-      padding: 50px 20px 30px;
-    }
+/* HEADER */
+header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:15px 20px;
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(10px);
+}
+.logo img{
+    height:40px;
+}
+header h1{
+    font-size:24px;
+    font-weight:700;
+}
+.signin-btn{
+    padding:10px 20px;
+    border:none;
+    background:#ffb703;
+    color:#000;
+    font-weight:600;
+    border-radius:25px;
+    cursor:pointer;
+    transition:0.3s;
+}
+.signin-btn:hover{
+    transform:scale(1.05);
+}
 
-    header img {
-      width: 110px;
-      border-radius: 50%;
-      box-shadow: 0 6px 20px rgba(0, 200, 255, 0.3);
-    }
+/* HERO */
+.hero{
+    text-align:center;
+    padding:60px 20px;
+}
+.hero h2{
+    font-size:32px;
+    margin-bottom:10px;
+}
+.hero p{
+    max-width:700px;
+    margin:auto;
+    opacity:0.9;
+}
 
-    header h1 {
-      font-size: 2.2rem;
-      margin-top: 15px;
-      color: #00eaff;
-      text-shadow: 0 0 10px rgba(0,234,255,0.4);
-    }
+/* PACKAGES */
+.packages{
+    padding:50px 20px;
+}
+.packages h2{
+    text-align:center;
+    margin-bottom:30px;
+}
+.package-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+}
+.package-card{
+    background:rgba(255,255,255,0.1);
+    border-radius:20px;
+    padding:20px;
+    text-align:center;
+    backdrop-filter:blur(10px);
+    transition:0.3s;
+}
+.package-card:hover{
+    transform:translateY(-8px);
+}
+.package-card img{
+    width: 200px;;
+    height:250px;
+    object-fit:cover;
+    border-radius:15px;
+}
+.package-card h3{
+    margin:15px 0 5px;
+}
+.price{
+    font-size:18px;
+    font-weight:600;
+    color:#ffb703;
+}
+.btn-group{
+    margin-top:15px;
+}
+.btn{
+    padding:10px 15px;
+    border:none;
+    border-radius:20px;
+    cursor:pointer;
+    font-weight:600;
+    margin:5px;
+}
+.buy{
+    background:#00ffcc;
+}
+.desc{
+    background:#ffb703;
+}
 
-    header p {
-      margin-top: 10px;
-      font-size: 1rem;
-      color: #ccc;
-    }
+/* MODAL */
+.modal{
+    position:fixed;
+    top:0; left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.6);
+    display:none;
+    align-items:center;
+    justify-content:center;
+}
+.modal-content{
+    background:#111;
+    padding:25px;
+    border-radius:20px;
+    max-width:400px;
+    width:90%;
+    position:relative;
+}
+.close{
+    position:absolute;
+    top:10px;
+    right:15px;
+    font-size:22px;
+    cursor:pointer;
+}
 
-    .btn {
-      padding: 12px 26px;
-      margin-top: 18px;
-      border: none;
-      background: linear-gradient(135deg, #00eaff, #0078ff);
-      color: white;
-      font-size: 1rem;
-      font-weight: bold;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: transform 0.2s ease, background 0.3s ease;
-      user-select: none;
-    }
+/* INFO SECTIONS */
+.section{
+    padding:50px 20px;
+    background:rgba(255,255,255,0.05);
+    margin-top:30px;
+}
+.section h2{
+    text-align:center;
+    margin-bottom:20px;
+}
+.section p, .section li{
+    max-width:900px;
+    margin:auto;
+    opacity:0.9;
+    line-height:1.7;
+}
+.section ul{
+    margin-top:15px;
+    padding-left:20px;
+}
 
-    .btn:hover {
-      transform: translateY(-2px);
-      background: linear-gradient(135deg, #0078ff, #00eaff);
-    }
-
-    section {
-      padding: 40px 20px;
-      max-width: 1100px;
-      margin: auto;
-    }
-
-    section h2 {
-      text-align: center;
-      font-size: 1.8rem;
-      margin-bottom: 25px;
-      color: #00ffd5;
-      text-shadow: 0 0 8px rgba(0,255,213,0.4);
-    }
-
-    /* Packages */
-    .packages {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 25px;
-    }
-
-    .package {
-      background: rgba(255, 255, 255, 0.07);
-      padding: 25px;
-      border-radius: 15px;
-      text-align: center;
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
-      transition: transform 0.3s ease;
-      position: relative;
-    }
-
-    .package:hover {
-      transform: scale(1.05);
-    }
-
-    .package img {
-      width: 100%;
-      height: 300px;
-      object-fit: cover;
-      border-radius: 12px;
-      margin-bottom: 15px;
-    }
-
-    .package h3 {
-      font-size: 1.4rem;
-      margin-bottom: 8px;
-    }
-
-    .price {
-      font-size: 1.3rem;
-      font-weight: bold;
-      color: #00ffd5;
-      margin-bottom: 15px;
-    }
-
-    /* Top Users */
-    .top-users {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      justify-content: center;
-    }
-
-    .user {
-      text-align: center;
-      background: rgba(255,255,255,0.05);
-      padding: 15px;
-      border-radius: 15px;
-      width: 200px;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.3);
-      transition: transform 0.3s ease;
-    }
-
-    .user:hover { transform: translateY(-5px); }
-
-    .user img {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      border: 3px solid gold;
-      margin-bottom: 10px;
-      object-fit: cover;
-    }
-
-    .total-members {
-      text-align: center;
-      margin-top: 20px;
-      font-size: 1.2rem;
-      color: #00ffcc;
-    }
-
-    /* Advantages Table */
-    .advantage-table {
-      width: 100%;
-      border-collapse: collapse;
-      border-radius: 12px;
-      overflow: hidden;
-    }
-
-    .advantage-table thead {
-      background: #00c6ff;
-      color: #000;
-    }
-
-    .advantage-table th,
-    .advantage-table td {
-      padding: 15px;
-      text-align: left;
-    }
-
-    .advantage-table tbody tr:nth-child(even) {
-      background: rgba(255,255,255,0.05);
-    }
-
-    .advantage-table tbody tr:hover {
-      background: rgba(255,255,255,0.15);
-    }
-
-    /* Team */
-    .team {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 25px;
-    }
-
-    .member {
-      text-align: center;
-      width: 220px;
-      background: rgba(255,255,255,0.05);
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.3);
-    }
-
-    .member img {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      border: 2px solid #00ffd5;
-      margin-bottom: 10px;
-      object-fit: cover;
-    }
-
-    footer {
-      background: #111;
-      padding: 25px 15px;
-      text-align: center;
-      margin-top: 40px;
-      border-top: 2px solid #00c6ff;
-      color: #aaa;
-    }
-
-    footer h3 {
-      margin-bottom: 8px;
-      color: #00ffd5;
-    }
-
-    /* Popup overlay and content */
-    .popup-overlay {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
-      background: rgba(0,0,0,0.75);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-      visibility: hidden;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-    .popup-overlay.active {
-      visibility: visible;
-      opacity: 1;
-    }
-    .popup-content {
-      background: #222f3e;
-      color: #fff;
-      max-width: 400px;
-      width: 90%;
-      padding: 25px 30px;
-      border-radius: 15px;
-      box-shadow: 0 6px 25px rgba(0, 200, 255, 0.5);
-      position: relative;
-      font-size: 1rem;
-      line-height: 1.5;
-    }
-    .popup-content h3 {
-      margin-bottom: 15px;
-      color: #00eaff;
-      text-shadow: 0 0 8px rgba(0,234,255,0.7);
-      text-align: center;
-    }
-    .popup-content ul {
-      list-style: disc;
-      padding-left: 20px;
-      margin-bottom: 20px;
-    }
-    .popup-content ul li {
-      margin-bottom: 8px;
-    }
-    .popup-close {
-      position: absolute;
-      top: 12px;
-      right: 15px;
-      background: transparent;
-      border: none;
-      font-size: 1.4rem;
-      color: #00eaff;
-      cursor: pointer;
-      font-weight: bold;
-      transition: color 0.2s ease;
-    }
-    .popup-close:hover {
-      color: #0078ff;
-    }
-
-    /* Space between Buy and Description buttons */
-    .package-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      margin-top: 15px;
-      flex-wrap: wrap;
-    }
-  </style>
+/* FOOTER */
+footer{
+    padding:30px 20px;
+    text-align:center;
+    font-size:14px;
+    background:#000;
+    opacity:0.9;
+}
+footer a{
+    color:#ffb703;
+    text-decoration:none;
+}
+</style>
 </head>
+
 <body>
 
-  <header>
-    <img src="https://raw.githubusercontent.com/neptrade/Nep-x-trade-/refs/heads/main/logo.png" alt="GrowUp Trading Logo" />
-    <h1>Nep X Trading</h1>
-    <p>We help you grow your money with secure and smart investment opportunities in Nepal.</p>
-    <button class="btn" onclick="location.href='login.html'">Sign In</button>
-  </header>
-
-  <!-- Investment Packages -->
-  <section>
-    <h2>Investment Packages</h2>
-    <div class="packages">
-      <div class="package">
-        <img src="https://raw.githubusercontent.com/neptrade/Nep-x-trade-/refs/heads/main/normal.png" alt="Normal" />
-        <h3>Normal Package</h3>
-        <div class="price">NPR Rs.300/-</div>
-        <div class="package-buttons">
-          <button class="btn buy-btn" data-package="Normal">Buy Now</button>
-          <button class="btn desc-btn" data-package="Normal">Description</button>
-        </div>
-      </div>
-      <div class="package">
-        <img src="https://raw.githubusercontent.com/neptrade/Nep-x-trade-/refs/heads/main/siver.png" alt="Silver" />
-        <h3>Silver Package</h3>
-        <div class="price">NPR Rs.500/-</div>
-        <div class="package-buttons">
-          <button class="btn buy-btn" data-package="Silver">Buy Now</button>
-          <button class="btn desc-btn" data-package="Silver">Description</button>
-        </div>
-      </div>
-      <div class="package">
-        <img src="https://raw.githubusercontent.com/neptrade/Nep-x-trade-/refs/heads/main/gold.png" alt="Gold" />
-        <h3>Gold Package</h3>
-        <div class="price">NPR Rs.900/-</div>
-        <div class="package-buttons">
-          <button class="btn buy-btn" data-package="Gold">Buy Now</button>
-          <button class="btn desc-btn" data-package="Gold">Description</button>
-        </div>
-      </div>
-      <div class="package">
-        <img src="https://raw.githubusercontent.com/neptrade/Nep-x-trade-/refs/heads/main/premium.png" alt="Platinum" />
-        <h3>Premium Package</h3>
-        <div class="price">NPR Rs.1450/-</div>
-        <div class="package-buttons">
-          <button class="btn buy-btn" data-package="Premium">Buy Now</button>
-          <button class="btn desc-btn" data-package="Premium">Description</button>
-        </div>
-      </div>
-      <div class="package">
-        <img src="https://raw.githubusercontent.com/neptrade/Nep-x-trade-/refs/heads/main/daimond.png" alt="Diamond" />
-        <h3>Diamond Package</h3>
-        <div class="price">NPR Rs.1750/-</div>
-        <div class="package-buttons">
-          <button class="btn buy-btn" data-package="Diamond">Buy Now</button>
-          <button class="btn desc-btn" data-package="Diamond">Description</button>
-        </div>
-      </div>
+<header>
+    <div class="logo">
+        <!-- ADD YOUR LOGO IMAGE HERE -->
+        <img src="https://raw.githubusercontent.com/neptrade/neptrading/refs/heads/main/Apple%20Trading.png" alt="Logo">
     </div>
-  </section>
+    <h1>Nep Trading</h1>
+    <button class="signin-btn" onclick="location.href='another.html'">Sign In</button>
+</header>
 
-  <!-- Top Users -->
-  <section>
-    <h2>Top Users</h2>
-    <div class="top-users">
-      <div class="user">
-        <img src="https://raw.githubusercontent.com/nepjob/Esewa/refs/heads/main/4f697e87177f74d36fcd3ce4de11c086.jpg" alt="Bishnu Karki" />
-        <h3>#1 Bishnu Karki</h3>
-        <p>Level 28</p>
-      </div>
-      <div class="user">
-        <img src="https://raw.githubusercontent.com/nepjob/Esewa/refs/heads/main/b57d060500a81d9da302180aebbd395b.jpg" alt="Rejina Tamang" />
-        <h3>#2 Rejina Tamang</h3>
-        <p>Level 26</p>
-      </div>
-      <div class="user">
-        <img src="https://raw.githubusercontent.com/nepjob/Esewa/refs/heads/main/4615550ad0b619d57ae2f9b86bc909ff.jpg" alt="Umesh Rai" />
-        <h3>#3 Umesh Rai</h3>
-        <p>Level 28</p>
-      </div>
-    </div>
-    <div class="total-members">🎉 Total Members: 426</div>
-  </section>
+<section class="hero">
+    <h2>Nepal’s Trusted Online Earning Platform</h2>
+    <p>Nep Trading is a secure, transparent, and professional earning platform designed for everyone in Nepal. Start your digital earning journey with confidence.</p>
+</section>
 
-  <!-- Advantages -->
-  <section>
-    <h2>Advantages of GrowUp Trading</h2>
-    <table class="advantage-table">
-      <thead>
-        <tr>
-          <th>Feature</th>
-          <th>Benefit</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>🔒 Secure Platform</td><td>Trusted and secured investment in Nepal</td></tr>
-        <tr><td>💳 Flexible Withdrawals</td><td>Esewa, Khalti, IMEPay, Bank, or Card</td></tr>
-        <tr><td>⚡ Fast Returns</td><td>Profit within 30–40 minutes of investing</td></tr>
-        <tr><td>📱 Easy to Use</td><td>User-friendly interface and tools</td></tr>
-        <tr><td>📞 24/7 Support</td><td>Live customer assistance anytime</td></tr>
-      </tbody>
-    </table>
-  </section>
+<section class="packages">
+<h2>Our Packages</h2>
+<div class="package-grid">
 
-  <!-- Team -->
-  <section>
-    <h2>Our Team</h2>
-    <div class="team">
-      <div class="member">
-        <img src="https://raw.githubusercontent.com/nepjob/Esewa/refs/heads/main/645b9fbec719e20f7c3f85e8f390114a.jpg" alt="Suresh Karki" />
-        <h3>Suresh Karki</h3>
-        <p>Pokhara</p>
-        <p>Assistant</p>
-      </div>
-      <div class="member">
-        <img src="https://raw.githubusercontent.com/nepjob/Esewa/refs/heads/main/c761cbf39d8c6f6eb3c38248b5b47209.jpg" alt="Prabin Khatri" />
-        <h3>Prabin Khatri</h3>
-        <p>Kathmandu, Baneshwor</p>
-        <p>MD</p>
-      </div>
-      <div class="member">
-        <img src="https://raw.githubusercontent.com/nepjob/Esewa/refs/heads/main/c2a206a32491f11a3f3dbdc410a08713.jpg" alt="Sarita Magar" />
-        <h3>Sarita Magar</h3>
-        <p>Manager</p>
-      </div>
-    </div>
-  </section>
+<!-- NORMAL -->
+<div class="package-card">
+<img src="https://raw.githubusercontent.com/neptrade/Nep-x-trade-/refs/heads/main/normal.png">
+<h3>Normal Package</h3>
+<p class="price">NPR Rs. 800/-</p>
+<div class="btn-group">
+<button class="btn buy" onclick="location.href='Buy.html'">Buy Now</button>
+<button class="btn desc" onclick="showDesc('normal')">Description</button>
+</div>
+</div>
 
-  <footer>
-    <h3>Privacy & Terms</h3>
-    <p>© 2025 GrowUp Trading | Verified by Play Protect</p>
-  </footer>
+<!-- GOLD -->
+<div class="package-card">
+<img src="https://raw.githubusercontent.com/neptrade/Nep-x-trade-/refs/heads/main/gold.png">
+<h3>Gold Package</h3>
+<p class="price">NPR Rs. 1500/-</p>
+<div class="btn-group">
+<button class="btn buy" onclick="location.href='Buy.html'">Buy Now</button>
+<button class="btn desc" onclick="showDesc('gold')">Description</button>
+</div>
+</div>
 
-  <!-- Popup markup -->
-  <div id="popup" class="popup-overlay" role="dialog" aria-modal="true" aria-labelledby="popupTitle" tabindex="-1">
-    <div class="popup-content">
-      <button class="popup-close" aria-label="Close description popup">&times;</button>
-      <h3 id="popupTitle">Package Description</h3>
-      <ul id="popupList"></ul>
-    </div>
-  </div>
+<!-- DIAMOND -->
+<div class="package-card">
+<img src="https://raw.githubusercontent.com/neptrade/Nep-x-trade-/refs/heads/main/daimond.png">
+<h3>Diamond Package</h3>
+<p class="price">NPR Rs. 1800/-</p>
+<div class="btn-group">
+<button class="btn buy" onclick="location.href='Buy.html'">Buy Now</button>
+<button class="btn desc" onclick="showDesc('diamond')">Description</button>
+</div>
+</div>
 
-  <script>
-    // Descriptions for packages
-    const descriptions = {
-      Normal: [
-        "Basic investment entry",
-        "1800 cashback",
-        "Fast return",
-        "24/7 Support",
-        "1 time withdraw limit per day",
-        "Upto 2k per day income without invest",
-        "Upto 15k per day income with invest"
-      ],
-      Silver: [
-        "Higher profit than Normal",
-        "1800 cashback",
-        "Priority support",
-        "Daily earnings",
-        "3 time withdraw limit per day",
-        "Upto 5k per day income without invest",
-        "Upto 25k per day income with invest"
-      ],
-      Gold: [
-        "High return package",
-        "Fast withdrawal",
-        "Premium signals",
-        "Dedicated support",
-        "5 time withdraw limit per day",
-        "Upto 7k per day income without invest",
-        "Upto 20k per day income with invest"
-      ],
-      Premium: [
-        "Very high profit",
-        "Instant withdrawal",
-        "VIP account",
-        "Personal manager",
-        "7 time withdraw limit per day",
-        "Upto 10k per day income without invest",
-        "Upto 28k per day income with invest"
-      ],
-      Diamond: [
-        "Maximum profit",
-        "No risk in trading",
-        "Lifetime VIP",
-        "Top priority support",
-        "10 time withdraw limit per day",
-        "Upto 15k per day income without invest",
-        "Upto 35k per day income with invest"
-      ]
-    };
+<!-- PREMIUM -->
+<div class="package-card">
+<img src="https://raw.githubusercontent.com/neptrade/Nep-x-trade-/refs/heads/main/premium.png">
+<h3>Premium Package</h3>
+<p class="price">NPR Rs. 2500/-</p>
+<div class="btn-group">
+<button class="btn buy" onclick="location.href='Buy.html'">Buy Now</button>
+<button class="btn desc" onclick="showDesc('premium')">Description</button>
+</div>
+</div>
 
-    // Redirect buy buttons to another.html
-    document.querySelectorAll('.buy-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        // Redirect to another.html
-        window.location.href = 'package.html';
-      });
-    });
+</div>
+</section>
 
-    // Popup elements
-    const popup = document.getElementById('popup');
-    const popupList = document.getElementById('popupList');
-    const popupTitle = document.getElementById('popupTitle');
-    const popupClose = popup.querySelector('.popup-close');
+<!-- MODAL -->
+<div class="modal" id="modal">
+<div class="modal-content">
+<span class="close" onclick="closeModal()">×</span>
+<div id="modalText"></div>
+</div>
+</div>
 
-    // Show description popup
-    function showDescription(packageName) {
-      const descArr = descriptions[packageName];
-      popupTitle.textContent = `${packageName} Package Description`;
-      popupList.innerHTML = '';
-      if (descArr && descArr.length) {
-        descArr.forEach(item => {
-          const li = document.createElement('li');
-          li.textContent = item;
-          popupList.appendChild(li);
-        });
-      } else {
-        popupList.innerHTML = '<li>No description available.</li>';
-      }
-      popup.classList.add('active');
-      popup.focus();
+<section class="section">
+<h2>Why Nep Trading?</h2>
+<p>Nep Trading is Nepal’s best earning website offering safe investment plans, daily rewards, instant withdrawals, and professional customer support. Thousands of users trust us for stable and transparent income.</p>
+<ul>
+<li>100% Secure Platform</li>
+<li>Daily Rewards & Cashback</li>
+<li>Fast Withdrawals</li>
+<li>Mobile & PC Friendly</li>
+<li>Trusted by Nepali Users</li>
+</ul>
+</section>
+
+<section class="section">
+<h2>What Our Users Say</h2>
+<p>⭐⭐⭐⭐⭐ “Nep Trading changed my earning life. Daily rewards are real!”</p>
+<p>⭐⭐⭐⭐⭐ “Best online earning platform in Nepal.”</p>
+</section>
+
+<section class="section">
+<h2>Disclaimer</h2>
+<p>Nep Trading is a digital earning platform. Earnings depend on user activity and package selection. We do not guarantee fixed income.</p>
+</section>
+
+<section class="section">
+<h2>Privacy Policy</h2>
+<p>Your data is safe with us. We never share personal information with third parties. All transactions are secured.</p>
+</section>
+
+<footer>
+<p>© 2026 Nep Trading. All Rights Reserved.</p>
+</footer>
+
+<script>
+function showDesc(type){
+    let text="";
+    if(type==="normal"){
+        text=`<h3>Normal Package</h3>
+        <ul>
+        <li>Free Rs.1200 Cashback</li>
+        <li>Daily Reward upto Rs.300</li>
+        <li>Basic Investment Plan</li>
+        <li>1 Withdrawal per day</li>
+        </ul>`;
     }
-
-    // Close popup function
-    function closePopup() {
-      popup.classList.remove('active');
+    if(type==="gold"){
+        text=`<h3>Gold Package</h3>
+        <ul>
+        <li>Free Rs.1800 Cashback</li>
+        <li>Daily Reward upto Rs.800</li>
+        <li>6 Withdrawals per day</li>
+        <li>Free Weekly Gifts</li>
+        </ul>`;
     }
+    if(type==="diamond"){
+        text=`<h3>Diamond Package</h3>
+        <ul>
+        <li>Free Rs.2500 Cashback</li>
+        <li>Daily Reward upto Rs.1100</li>
+        <li>12 Withdrawals per day</li>
+        <li>Free Weekly Gifts</li>
+        </ul>`;
+    }
+    if(type==="premium"){
+        text=`<h3>Premium Package</h3>
+        <ul>
+        <li>Free Rs.3200 Cashback</li>
+        <li>Daily Reward upto Rs.1700</li>
+        <li>Unlimited Withdrawals</li>
+        <li>VIP Support & Gifts</li>
+        </ul>`;
+    }
+    document.getElementById("modalText").innerHTML=text;
+    document.getElementById("modal").style.display="flex";
+}
+function closeModal(){
+    document.getElementById("modal").style.display="none";
+}
+</script>
 
-    // Description buttons event
-    document.querySelectorAll('.desc-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const pkg = btn.getAttribute('data-package');
-        showDescription(pkg);
-      });
-    });
-
-    // Close popup on clicking close button
-    popupClose.addEventListener('click', closePopup);
-
-    // Close popup when clicking outside the popup-content
-    popup.addEventListener('click', e => {
-      if (e.target === popup) {
-        closePopup();
-      }
-    });
-
-    // Accessibility: close popup on Escape key
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape' && popup.classList.contains('active')) {
-        closePopup();
-      }
-    });
-  </script>
 </body>
 </html>
-
-
-
-
-
-
-
