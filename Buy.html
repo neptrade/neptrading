@@ -1,348 +1,238 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Buy a Package - Professional Platform</title>
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
-  <!-- Material Icons -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <title>Secure Package Purchase</title>
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
   <style>
-    /* Reset & base */
     * {
       box-sizing: border-box;
-      margin: 0; padding: 0;
+      margin: 0;
+      padding: 0;
       font-family: 'Poppins', sans-serif;
     }
-    body {
-      background: linear-gradient(135deg, #1f2a44, #34455a);
-      color: #e0e7ff;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 30px 15px;
-      user-select: none;
-    }
 
-    h1 {
-      font-weight: 600;
-      font-size: 2.8rem;
-      color: #00d2ff;
-      text-align: center;
-      margin-bottom: 15px;
-      text-shadow: 0 0 12px #00d2ffaa;
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      color: #eaf4ff;
     }
 
     .container {
-      max-width: 600px;
+      max-width: 620px;
       width: 100%;
-      background: rgba(30, 38, 56, 0.85);
-      border-radius: 15px;
-      box-shadow: 0 12px 30px rgba(0, 210, 255, 0.3);
-      padding: 25px 30px 40px;
-      display: flex;
-      flex-direction: column;
-      gap: 30px;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(18px);
+      border-radius: 18px;
+      padding: 30px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+    }
+
+    h1 {
+      text-align: center;
+      color: #00eaff;
+      margin-bottom: 25px;
+      font-size: 2.4rem;
+    }
+
+    section {
+      margin-bottom: 28px;
     }
 
     /* QR Section */
     .qr-section {
       text-align: center;
-      color: #a0cfff;
-      font-weight: 500;
-      font-size: 1.1rem;
-      line-height: 1.4;
+      color: #b7dfff;
     }
 
-    .qr-section strong {
-      color: #00d2ff;
+    .qr-section img {
+      margin-top: 15px;
+      max-width: 230px;
+      border-radius: 14px;
+      border: 3px solid #00eaff55;
+      box-shadow: 0 0 20px #00eaff66;
     }
 
-    #qrImage {
-      margin: 20px auto 10px;
-      max-width: 250px;
+    /* Upload */
+    label {
+      font-weight: 600;
+      color: #7fdcff;
+    }
+
+    input[type="file"],
+    input[type="text"] {
       width: 100%;
-      border-radius: 15px;
-      box-shadow: 0 8px 25px #00d2ff88;
-      border: 3px solid #00d2ff66;
-      transition: transform 0.3s ease;
-      cursor: default;
-    }
-    #qrImage:hover {
-      transform: scale(1.05);
-    }
-
-    /* Upload screenshot */
-    .upload-section {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
-      font-weight: 500;
-      color: #a0cfff;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+      margin-top: 8px;
     }
 
     input[type="file"] {
-      background: #00395d;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 12px;
-      color: #00d2ff;
-      font-weight: 600;
+      background: #0a3b55;
+      color: #00eaff;
       cursor: pointer;
-      transition: background 0.25s ease;
-      max-width: 100%;
     }
-    input[type="file"]:hover {
-      background: #006699;
+
+    input[type="text"] {
+      background: #eaf4ff;
+      color: #002a44;
+      font-weight: 600;
+      letter-spacing: 0.1em;
     }
 
     .upload-msg {
       margin-top: 12px;
-      color: #39ff14;
       font-weight: 600;
-      font-size: 1.1rem;
-      text-shadow: 0 0 8px #39ff14aa;
-      min-height: 1.4em;
+      color: #2aff00;
     }
 
-    /* Package ID box */
-    .package-box {
-      background: #00385c;
+    /* Password Box */
+    .secure-box {
+      background: #062b3f;
       border-radius: 15px;
-      padding: 25px 20px;
-      box-shadow: 0 0 15px #00d2ff77 inset;
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-      color: #89b7ff;
+      padding: 22px;
+      box-shadow: inset 0 0 15px #00eaff55;
     }
 
-    .package-box label {
-      font-weight: 600;
-      font-size: 1.1rem;
-      margin-bottom: 6px;
-      color: #00b4ff;
-      user-select: text;
-    }
-
-    .package-box input[type="text"] {
-      padding: 12px 15px;
+    .password-display {
+      margin-top: 14px;
+      padding: 16px;
       border-radius: 12px;
-      border: none;
-      outline: none;
-      font-size: 1.2rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: #00223f;
-      transition: box-shadow 0.3s ease;
-      user-select: text;
-    }
-    .package-box input[type="text"]:focus {
-      box-shadow: 0 0 12px #00d2ffcc;
-    }
-
-    .package-id-display {
-      background: #002342;
-      border-radius: 12px;
-      padding: 15px 18px;
-      font-weight: 700;
+      background: #021b2c;
+      text-align: center;
       font-size: 1.5rem;
-      color: #00d2ff;
-      user-select: text;
-      filter: blur(6px);
-      transition: filter 0.4s ease;
-      letter-spacing: 0.15em;
-      text-align: center;
-      user-select: all;
-      cursor: default;
-      box-shadow: 0 0 8px #00d2ff99 inset;
-      user-select: text;
-    }
-
-    .package-id-display.visible {
-      filter: none;
-      cursor: text;
-      user-select: text;
-      text-shadow: 0 0 10px #00eaffcc;
-    }
-
-    /* Verified by Play Protect */
-    .verified {
-      margin-top: 30px;
-      text-align: center;
-      color: #00d2ff;
+      letter-spacing: 0.25em;
       font-weight: 700;
-      font-size: 1.3rem;
+      color: #00eaff;
+      filter: blur(8px);
+      transition: all 0.4s ease;
       user-select: none;
     }
 
-    .verified i.material-icons {
-      vertical-align: middle;
-      font-size: 36px;
-      color: #39ff14;
-      margin-left: 10px;
-      filter: drop-shadow(0 0 3px #39ff14aa);
-      transition: transform 0.3s ease;
-    }
-    .verified i.material-icons:hover {
-      transform: rotate(20deg) scale(1.15);
-      color: #00ff00;
+    .password-display.visible {
+      filter: none;
+      text-shadow: 0 0 12px #00f2ffaa;
     }
 
-    /* License */
-    .license {
-      margin-top: 6px;
+    .status-msg {
+      margin-top: 10px;
       font-size: 0.9rem;
-      color: #90c8ffcc;
       font-style: italic;
-      user-select: none;
-      text-align: center;
-      letter-spacing: 0.04em;
+      color: #9acfff;
     }
 
-    /* Responsive */
+    /* Verified */
+    .verified {
+      text-align: center;
+      font-weight: 700;
+      color: #00eaff;
+    }
+
+    .verified i {
+      color: #2aff00;
+      vertical-align: middle;
+      font-size: 30px;
+      margin-left: 6px;
+    }
+
+    .license {
+      text-align: center;
+      margin-top: 6px;
+      font-size: 0.85rem;
+      color: #aaccee;
+      font-style: italic;
+    }
+
     @media (max-width: 480px) {
-      .container {
-        padding: 20px 15px 30px;
-      }
       h1 {
         font-size: 2rem;
-      }
-      #qrImage {
-        max-width: 180px;
-      }
-      .package-box input[type="text"] {
-        font-size: 1.1rem;
-      }
-      .package-id-display {
-        font-size: 1.3rem;
-      }
-      .verified {
-        font-size: 1.1rem;
-      }
-      .verified i.material-icons {
-        font-size: 28px;
       }
     }
   </style>
 </head>
+
 <body>
-  <h1>Buy a Package</h1>
 
-  <div class="container">
-    <!-- QR and Payment Instructions -->
-    <section class="qr-section" aria-label="Bank QR Code Payment Section">
-      <p>Please scan and pay using the bank QR code below.</p>
-      <p><strong>After payment, send us a screenshot of the payment for verification.</strong></p>
-      <img id="qrImage" src="https://raw.githubusercontent.com/neptrade/neptrading/refs/heads/main/Screenshot_20251216_123254_Laxmi%20Sunrise%20Mobile%20Banking.jpg" alt="Bank QR Code - Scan to Pay" />
-    </section>
+<div class="container">
+  <h1>Secure Package Purchase</h1>
 
-    <!-- Screenshot upload -->
-    <section class="upload-section" aria-label="Payment Screenshot Upload">
-      <label for="paymentScreenshot" style="font-weight:600; color:#00aaff;">Upload your payment screenshot here:</label>
-      <input
-        type="file"
-        id="paymentScreenshot"
-        accept="image/*"
-        aria-describedby="uploadHelp"
-        aria-required="true"
-      />
-      <div class="upload-msg" role="alert" aria-live="polite" id="uploadMessage"></div>
-    </section>
+  <!-- QR Section -->
+  <section class="qr-section">
+    <p>Scan the QR code and complete your payment.</p>
+    <strong>Upload payment screenshot after successful payment.</strong>
+    <img src="https://raw.githubusercontent.com/neptrade/neptrading/refs/heads/main/Screenshot_20251216_123254_Laxmi%20Sunrise%20Mobile%20Banking.jpg" alt="QR Code">
+  </section>
 
-    <!-- Package ID Box -->
-    <section class="package-box" aria-label="Package ID Verification Box">
-      <label for="codeInput">Enter agent code to see your Package ID:</label>
-      <input
-        type="text"
-        id="codeInput"
-        placeholder="Enter code here..."
-        aria-describedby="codeHelp"
-        aria-required="true"
-        autocomplete="off"
-        maxlength="10"
-      />
-      <div
-        class="package-id-display"
-        id="packageIdDisplay"
-        aria-live="polite"
-        aria-atomic="true"
-        aria-label="Package ID"
-        tabindex="0"
-      >
-        Nep470
-      </div>
-      <small id="codeHelp" style="color:#6699cc; font-style:italic; margin-top: 6px; display:block;">
-        ask to agent for code:
-      </small>
-    </section>
+  <!-- Upload -->
+  <section>
+    <label>Upload Payment Screenshot</label>
+    <input type="file" id="paymentScreenshot" accept="image/*">
+    <div class="upload-msg" id="uploadMessage"></div>
+  </section>
 
-    <!-- Verified Badge and License -->
-    <section class="verified" aria-label="Verification and Licensing Information">
-      Verified by Play Protect
-      <i class="material-icons" title="Verified">&#10004;</i>
-      <div class="license">Licensed &amp; Secure Platform © 2025 GrowUp Trading</div>
-    </section>
+  <!-- Password Section -->
+  <section class="secure-box">
+    <label>Enter Agent Code to View Password</label>
+    <input type="text" id="codeInput" placeholder="Enter agent code" maxlength="10">
+
+    <div class="password-display" id="passwordDisplay">
+      ********
+    </div>
+
+    <div class="status-msg" id="statusMsg">
+      Ask your agent for the verification code.
+    </div>
+  </section>
+
+  <!-- Verified -->
+  <div class="verified">
+    Verified by Play Protect <i class="material-icons">verified</i>
   </div>
+  <div class="license">Licensed & Secure Platform © 2025 GrowUp Trading</div>
+</div>
 
-  <script>
-    const correctCode = "890";
-    const packageIdDisplay = document.getElementById("packageIdDisplay");
-    const codeInput = document.getElementById("codeInput");
-    const uploadInput = document.getElementById("paymentScreenshot");
-    const uploadMessage = document.getElementById("uploadMessage");
+<script>
+  const correctCode = "890";
+  const fixedPassword = "Nep470";
 
-    // Initially blur the package ID
-    packageIdDisplay.classList.remove("visible");
-    packageIdDisplay.setAttribute("aria-hidden", "true");
+  const codeInput = document.getElementById("codeInput");
+  const passwordDisplay = document.getElementById("passwordDisplay");
+  const statusMsg = document.getElementById("statusMsg");
 
-    // Check input for package code
-    codeInput.addEventListener("input", () => {
-      const val = codeInput.value.trim();
-      if (val === correctCode) {
-        packageIdDisplay.classList.add("visible");
-        packageIdDisplay.setAttribute("aria-hidden", "false");
-      } else {
-        packageIdDisplay.classList.remove("visible");
-        packageIdDisplay.setAttribute("aria-hidden", "true");
-      }
-    });
+  codeInput.addEventListener("input", () => {
+    if (codeInput.value.trim() === correctCode) {
+      passwordDisplay.textContent = fixedPassword;
+      passwordDisplay.classList.add("visible");
+      statusMsg.style.color = "#2aff00";
+      statusMsg.textContent = "Agent verified. Password unlocked.";
+    } else {
+      passwordDisplay.textContent = "********";
+      passwordDisplay.classList.remove("visible");
+      statusMsg.style.color = "#9acfff";
+      statusMsg.textContent = "Ask your agent for the verification code.";
+    }
+  });
 
-    // Handle file upload for screenshot
-    uploadInput.addEventListener("change", () => {
-      const files = uploadInput.files;
-      if (files.length === 0) {
-        uploadMessage.textContent = "";
-        return;
-      }
-      const file = files[0];
-      const validTypes = ["image/jpeg", "image/png", "image/gif", "image/webp"];
-      if (!validTypes.includes(file.type)) {
-        uploadMessage.style.color = "#ff6666";
-        uploadMessage.textContent = "Invalid file type. Please upload an image.";
-        uploadInput.value = "";
-        return;
-      }
+  const uploadInput = document.getElementById("paymentScreenshot");
+  const uploadMessage = document.getElementById("uploadMessage");
 
-      // Show preview + wait message
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        // Show preview of uploaded screenshot
-        uploadMessage.style.color = "#39ff14";
-        uploadMessage.innerHTML =
-          `<strong>Screenshot uploaded successfully.</strong><br><br>` +
-          `<img src="${e.target.result}" alt="Uploaded payment screenshot preview" ` +
-          `style="max-width: 100%; border-radius: 12px; box-shadow: 0 0 15px #39ff1411;" />` +
-          `<p style="margin-top:12px; font-weight:600; color:#39ff14;">Wait for confirmation.</p>`;
-      };
-      reader.readAsDataURL(file);
-    });
-  </script>
+  uploadInput.addEventListener("change", () => {
+    if (!uploadInput.files.length) return;
+    uploadMessage.textContent = "Screenshot uploaded successfully. Please wait for confirmation.";
+  });
+</script>
+
 </body>
 </html>
-
