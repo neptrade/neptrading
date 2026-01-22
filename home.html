@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apple Trading | Nepal's Best Earning Platform</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+body{
+    background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+    color:#fff;
+}
+
+/* HEADER */
+header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:15px 20px;
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(10px);
+}
+.logo img{
+    height:40px;
+}
+header h1{
+    font-size:24px;
+    font-weight:700;
+}
+.signin-btn{
+    padding:10px 20px;
+    border:none;
+    background:#ffb703;
+    color:#000;
+    font-weight:600;
+    border-radius:25px;
+    cursor:pointer;
+    transition:0.3s;
+}
+.signin-btn:hover{
+    transform:scale(1.05);
+}
+
+/* HERO */
+.hero{
+    text-align:center;
+    padding:60px 20px;
+}
+.hero h2{
+    font-size:32px;
+    margin-bottom:10px;
+}
+.hero p{
+    max-width:700px;
+    margin:auto;
+    opacity:0.9;
+}
+
+/* PACKAGES */
+.packages{
+    padding:50px 20px;
+}
+.packages h2{
+    text-align:center;
+    margin-bottom:30px;
+}
+.package-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+}
+.package-card{
+    background:rgba(255,255,255,0.1);
+    border-radius:20px;
+    padding:20px;
+    text-align:center;
+    backdrop-filter:blur(10px);
+    transition:0.3s;
+}
+.package-card:hover{
+    transform:translateY(-8px);
+}
+.package-card img{
+    width: 200px;;
+    height:250px;
+    object-fit:cover;
+    border-radius:15px;
+}
+.package-card h3{
+    margin:15px 0 5px;
+}
+.price{
+    font-size:18px;
+    font-weight:600;
+    color:#ffb703;
+}
+.btn-group{
+    margin-top:15px;
+}
+.btn{
+    padding:10px 15px;
+    border:none;
+    border-radius:20px;
+    cursor:pointer;
+    font-weight:600;
+    margin:5px;
+}
+.buy{
+    background:#00ffcc;
+}
+.desc{
+    background:#ffb703;
+}
+
+/* MODAL */
+.modal{
+    position:fixed;
+    top:0; left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.6);
+    display:none;
+    align-items:center;
+    justify-content:center;
+}
+.modal-content{
+    background:#111;
+    padding:25px;
+    border-radius:20px;
+    max-width:400px;
+    width:90%;
+    position:relative;
+}
+.close{
+    position:absolute;
+    top:10px;
+    right:15px;
+    font-size:22px;
+    cursor:pointer;
+}
+
+/* INFO SECTIONS */
+.section{
+    padding:50px 20px;
+    background:rgba(255,255,255,0.05);
+    margin-top:30px;
+}
+.section h2{
+    text-align:center;
+    margin-bottom:20px;
+}
+.section p, .section li{
+    max-width:900px;
+    margin:auto;
+    opacity:0.9;
+    line-height:1.7;
+}
+.section ul{
+    margin-top:15px;
+    padding-left:20px;
+}
+
+/* FOOTER */
+footer{
+    padding:30px 20px;
+    text-align:center;
+    font-size:14px;
+    background:#000;
+    opacity:0.9;
+}
+footer a{
+    color:#ffb703;
+    text-decoration:none;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">
+        <!-- ADD YOUR LOGO IMAGE HERE -->
+        <img src="https://raw.githubusercontent.com/neptrade/neptrading/refs/heads/main/Apple%20Trading.png" alt="Logo">
+    </div>
+    <h1>Nep Trading</h1>
+    <button class="signin-btn" onclick="location.href='another.html'">Sign In</button>
+</header>
+
+<section class="hero">
+    <h2>Nepal’s Trusted Online Earning Platform</h2>
+    <p>Nep Trading is a secure, transparent, and professional earning platform designed for everyone in Nepal. Start your digital earning journey with confidence.</p>
+</section>
+
+<section class="packages">
+<h2>Our Packages</h2>
+<div class="package-grid">
+
+<!-- NORMAL -->
+<div class="package-card">
+<img src="https://raw.githubusercontent.com/neptrade/Nep-x-trade-/refs/heads/main/normal.png">
+<h3>Normal Package</h3>
+<p class="price">NPR Rs. 800/-</p>
+<div class="btn-group">
+<button class="btn buy" onclick="location.href='Buy.html'">Buy Now</button>
+<button class="btn desc" onclick="showDesc('normal')">Description</button>
+</div>
+</div>
+
+<!-- GOLD -->
+<div class="package-card">
+<img src="https://raw.githubusercontent.com/neptrade/Nep-x-trade-/refs/heads/main/gold.png">
+<h3>Gold Package</h3>
+<p class="price">NPR Rs. 1500/-</p>
+<div class="btn-group">
+<button class="btn buy" onclick="location.href='Buy.html'">Buy Now</button>
+<button class="btn desc" onclick="showDesc('gold')">Description</button>
+</div>
+</div>
+
+<!-- DIAMOND -->
+<div class="package-card">
+<img src="https://raw.githubusercontent.com/neptrade/Nep-x-trade-/refs/heads/main/daimond.png">
+<h3>Diamond Package</h3>
+<p class="price">NPR Rs. 1800/-</p>
+<div class="btn-group">
+<button class="btn buy" onclick="location.href='Buy.html'">Buy Now</button>
+<button class="btn desc" onclick="showDesc('diamond')">Description</button>
+</div>
+</div>
+
+<!-- PREMIUM -->
+<div class="package-card">
+<img src="https://raw.githubusercontent.com/neptrade/Nep-x-trade-/refs/heads/main/premium.png">
+<h3>Premium Package</h3>
+<p class="price">NPR Rs. 2500/-</p>
+<div class="btn-group">
+<button class="btn buy" onclick="location.href='Buy.html'">Buy Now</button>
+<button class="btn desc" onclick="showDesc('premium')">Description</button>
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+<div class="modal-content">
+<span class="close" onclick="closeModal()">×</span>
+<div id="modalText"></div>
+</div>
+</div>
+
+<section class="section">
+<h2>Why Nep Trading?</h2>
+<p>Nep Trading is Nepal’s best earning website offering safe investment plans, daily rewards, instant withdrawals, and professional customer support. Thousands of users trust us for stable and transparent income.</p>
+<ul>
+<li>100% Secure Platform</li>
+<li>Daily Rewards & Cashback</li>
+<li>Fast Withdrawals</li>
+<li>Mobile & PC Friendly</li>
+<li>Trusted by Nepali Users</li>
+</ul>
+</section>
+
+<section class="section">
+<h2>What Our Users Say</h2>
+<p>⭐⭐⭐⭐⭐ “Nep Trading changed my earning life. Daily rewards are real!”</p>
+<p>⭐⭐⭐⭐⭐ “Best online earning platform in Nepal.”</p>
+</section>
+
+<section class="section">
+<h2>Disclaimer</h2>
+<p>Nep Trading is a digital earning platform. Earnings depend on user activity and package selection. We do not guarantee fixed income.</p>
+</section>
+
+<section class="section">
+<h2>Privacy Policy</h2>
+<p>Your data is safe with us. We never share personal information with third parties. All transactions are secured.</p>
+</section>
+
+<footer>
+<p>© 2026 Nep Trading. All Rights Reserved.</p>
+</footer>
+
+<script>
+function showDesc(type){
+    let text="";
+    if(type==="normal"){
+        text=`<h3>Normal Package</h3>
+        <ul>
+        <li>Free Rs.1200 Cashback</li>
+        <li>Daily Reward upto Rs.300</li>
+        <li>Basic Investment Plan</li>
+        <li>1 Withdrawal per day</li>
+        </ul>`;
+    }
+    if(type==="gold"){
+        text=`<h3>Gold Package</h3>
+        <ul>
+        <li>Free Rs.1800 Cashback</li>
+        <li>Daily Reward upto Rs.800</li>
+        <li>6 Withdrawals per day</li>
+        <li>Free Weekly Gifts</li>
+        </ul>`;
+    }
+    if(type==="diamond"){
+        text=`<h3>Diamond Package</h3>
+        <ul>
+        <li>Free Rs.2500 Cashback</li>
+        <li>Daily Reward upto Rs.1100</li>
+        <li>12 Withdrawals per day</li>
+        <li>Free Weekly Gifts</li>
+        </ul>`;
+    }
+    if(type==="premium"){
+        text=`<h3>Premium Package</h3>
+        <ul>
+        <li>Free Rs.3200 Cashback</li>
+        <li>Daily Reward upto Rs.1700</li>
+        <li>Unlimited Withdrawals</li>
+        <li>VIP Support & Gifts</li>
+        </ul>`;
+    }
+    document.getElementById("modalText").innerHTML=text;
+    document.getElementById("modal").style.display="flex";
+}
+function closeModal(){
+    document.getElementById("modal").style.display="none";
+}
+</script>
+
+</body>
+</html>
