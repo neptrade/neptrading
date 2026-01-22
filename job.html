@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prime Job Center | Find Jobs in Kathmandu Valley</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #3b82f6;
+            --accent-color: #f59e0b;
+            --bg-light: #f8fafc;
+            --text-dark: #1e293b;
+            --white: #ffffff;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Navbar */
+        nav {
+            background: var(--white);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .back-btn {
+            display: none;
+            background: var(--text-dark);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover { background: #000; }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+            color: white;
+            padding: 80px 5%;
+            text-align: center;
+        }
+
+        .hero h1 { font-size: 3rem; margin-bottom: 1rem; }
+        .hero p { font-size: 1.1rem; opacity: 0.9; max-width: 700px; margin: 0 auto 2rem; }
+
+        /* Search Bar */
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .search-container input {
+            width: 100%;
+            padding: 15px 25px;
+            border-radius: 50px;
+            border: none;
+            font-size: 1rem;
+            box-shadow: var(--shadow);
+        }
+
+        /* Categories Grid */
+        .container { padding: 50px 5%; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover { transform: translateY(-10px); }
+
+        .card-img {
+            width: 100%;
+            height: 180px;
+            background: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #aaa;
+        }
+
+        .card-content { padding: 20px; }
+        .card-content h3 { margin-bottom: 10px; }
+        .details-btn {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+
+        /* Job Details Page (Hidden by default) */
+        #job-details-view { display: none; }
+
+        .table-container {
+            overflow-x: auto;
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 800px;
+        }
+
+        th { background: #f1f5f9; text-align: left; padding: 15px; color: #64748b; font-weight: 600; }
+        td { padding: 15px; border-bottom: 1px solid #f1f5f9; }
+
+        .apply-btn {
+            background: #10b981;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.85rem;
+        }
+
+        .apply-btn:hover { background: #059669; }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px;
+            background: #1e293b;
+            color: white;
+            margin-top: 50px;
+        }
+
+        .verified { color: #10b981; font-weight: bold; margin-top: 10px; display: block; }
+
+        /* Responsive Fixes */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            th, td { font-size: 0.85rem; padding: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo"><i class="fas fa-briefcase"></i> Prime Job Center</div>
+        <div id="nav-back-container">
+            <a onclick="showHome()" class="back-btn" id="global-back-btn"><i class="fas fa-arrow-left"></i> Back</a>
+        </div>
+    </nav>
+
+    <div id="home-view">
+        <header class="hero">
+            <h1>Prime Job Center</h1>
+            <p>Your trusted partner in career growth. We connect talented individuals with top employers across the Kathmandu Valley (Kathmandu, Lalitpur, and Bhaktapur).</p>
+            
+            <div class="search-container">
+                <input type="text" placeholder="Search for jobs (e.g. Hotel, Mart, Driver)..." onkeyup="filterJobs()">
+            </div>
+        </header>
+
+        <section class="container">
+            <div class="grid" id="category-grid">
+                <div class="card">
+                    <div class="card-img"><i class="fas fa-hotel"></i></div>
+                    <div class="card-content">
+                        <h3>Job in Hotel</h3>
+                        <p>Explore opportunities in hospitality, from waiting staff to management.</p>
+                        <a class="details-btn" onclick="showDetails('hotel')">Details</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-img"><i class="fas fa-shopping-cart"></i></div>
+                    <div class="card-content">
+                        <h3>Job in Mart & Shop</h3>
+                        <p>Work with top retail brands like Bhat-Bhateni and local mini-marts.</p>
+                        <a class="details-btn" onclick="showDetails('mart')">Details</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-img"><i class="fas fa-industry"></i></div>
+                    <div class="card-content">
+                        <h3>Job in Industry</h3>
+                        <p>Packaging, production, and helper roles in major industrial groups.</p>
+                        <a class="details-btn" onclick="showDetails('industry')">Details</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-img"><i class="fas fa-car"></i></div>
+                    <div class="card-content">
+                        <h3>Job for Driving</h3>
+                        <p>Delivery riders, car drivers, and home chauffeurs needed.</p>
+                        <a class="details-btn" onclick="showDetails('driving')">Details</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="job-details-view" class="container">
+        <h2 id="details-title" style="margin-bottom: 20px; font-size: 2rem; color: var(--primary-color);">Job List</h2>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Job Type</th>
+                        <th>Requirement</th>
+                        <th>Duty Hour</th>
+                        <th>Salary</th>
+                        <th>Location</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="job-table-body">
+                    </tbody>
+            </table>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Prime Job Center. All rights reserved.</p>
+        <span class="verified"><i class="fas fa-check-circle"></i> Verified by Prime Job Finder</span>
+    </footer>
+
+    <script>
+        const jobData = {
+            hotel: [
+                ["Waiter", "No needed", "8hr", "18000/-", "Chabail"],
+                ["Waitress", "No needed", "8hr", "18500/-", "Baneshwor"],
+                ["Helper", "No needed", "8hr", "20000/-", "Baneshwor"],
+                ["Receptionist", "10th pass", "8hr", "21000/-", "Thamel"],
+                ["Bar tender", "Experienced", "8hr", "25000/-", "Thamel"],
+                ["Supervisor", "Experienced", "8hr", "22000/-", "Patan"]
+            ],
+            mart: [
+                ["Mart helper", "No needed", "8hr", "18500/-", "Ktm valley"],
+                ["Mart receptionist", "No needed", "8hr", "20000/-", "All over valley"],
+                ["Bhat-bhateni sales", "10th passed", "8hr", "19500/-", "Baneshwor"],
+                ["Mart helper", "10th passed", "8hr", "20000/-", "All over valley"],
+                ["Clothes seller", "10th passed", "8hr", "18000/-", "All over valley"],
+                ["Mobile shop", "10th passed", "8hr", "19000/-", "All over valley"],
+                ["Mini mart", "No needed", "8hr", "17000/-", "All over valley"],
+                ["Big mart", "10th passed", "8hr", "19500/-", "Koteshwor"],
+                ["Beauty parlour", "No needed", "8hr", "16000/-", "All over valley"]
+            ],
+            industry: [
+                ["CG group Helper", "No needed", "12hr", "24000/-", "All over ktm"],
+                ["Red bull packing", "No needed", "12hr", "25000/-", "All over ktm"],
+                ["Product packing", "No needed", "8hr", "20000/-", "All over ktm"],
+                ["Biscute packing", "No needed", "8hr", "18500/-", "All over ktm"],
+                ["Helper in industry", "No needed", "12hr", "24000/-", "All over ktm"]
+            ],
+            driving: [
+                ["Yango Rider", "License", "8hr", "22000/-", "All over valley"],
+                ["Car Driver", "License", "8hr", "19500/-", "All over valley"],
+                ["Indrive Rider", "License", "8hr", "21500/-", "All over valley"],
+                ["Home Car driver", "License", "8hr", "24000/-", "All over valley"]
+            ]
+        };
+
+        function showDetails(category) {
+            document.getElementById('home-view').style.display = 'none';
+            document.getElementById('job-details-view').style.display = 'block';
+            document.getElementById('global-back-btn').style.display = 'inline-block';
+            
+            const titleMap = { hotel: "Hotel Jobs", mart: "Mart & Shop Jobs", industry: "Industrial Jobs", driving: "Driving Jobs" };
+            document.getElementById('details-title').innerText = titleMap[category];
+            
+            const tbody = document.getElementById('job-table-body');
+            tbody.innerHTML = "";
+
+            jobData[category].forEach(job => {
+                const row = `<tr>
+                    <td><strong>${job[0]}</strong></td>
+                    <td>${job[1]}</td>
+                    <td>${job[2]}</td>
+                    <td><span style="color:#2563eb; font-weight:bold">${job[3]}</span></td>
+                    <td>${job[4]}</td>
+                    <td><a href="apply.html" class="apply-btn">Apply Now</a></td>
+                </tr>`;
+                tbody.innerHTML += row;
+            });
+            window.scrollTo(0,0);
+        }
+
+        function showHome() {
+            document.getElementById('home-view').style.display = 'block';
+            document.getElementById('job-details-view').style.display = 'none';
+            document.getElementById('global-back-btn').style.display = 'none';
+        }
+
+        function filterJobs() {
+            let input = document.querySelector('.search-container input').value.toLowerCase();
+            let cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                let text = card.innerText.toLowerCase();
+                card.style.display = text.includes(input) ? "block" : "none";
+            });
+        }
+    </script>
+</body>
+</html>
