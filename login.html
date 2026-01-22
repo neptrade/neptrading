@@ -161,7 +161,6 @@
         maxlength="20"
         aria-required="true"
         aria-invalid="false"
-        aria-describedby="errorMsg"
       />
       <button type="submit" aria-label="Login with Package ID">Login</button>
     </form>
@@ -169,7 +168,7 @@
     <div id="errorMsg" class="error-message" role="alert" aria-live="assertive"></div>
 
     <p class="note">
-      If you don't have a package ID, please buy a package.
+      If you don't have a package ID, Please buy a package
     </p>
   </main>
 
@@ -181,7 +180,7 @@
     const validPackageId = 'Nep470';
     const storageKey = 'savedPackageId';
 
-    // On page load: autofill & redirect if saved and valid
+    // On page load, check if package ID is saved
     window.addEventListener('DOMContentLoaded', () => {
       const savedId = localStorage.getItem(storageKey);
       if (savedId && savedId.toLowerCase() === validPackageId.toLowerCase()) {
@@ -191,7 +190,7 @@
         form.querySelector('button').textContent = 'Redirecting...';
         errorMsg.textContent = '';
         setTimeout(() => {
-          window.location.href = 'dash.html';
+          window.location.href = 'another.html';
         }, 1200);
       }
     });
@@ -200,6 +199,7 @@
       e.preventDefault();
       const val = input.value.trim();
 
+      // Reset error state
       errorMsg.textContent = '';
       input.setAttribute('aria-invalid', 'false');
 
@@ -209,14 +209,17 @@
       }
 
       if (val.toLowerCase() === validPackageId.toLowerCase()) {
-        // Save ID and redirect
+        // Save to localStorage
         localStorage.setItem(storageKey, val);
+
+        // Disable inputs & button
         input.disabled = true;
         form.querySelector('button').disabled = true;
         form.querySelector('button').textContent = 'Logging in...';
 
+        // Redirect after short delay
         setTimeout(() => {
-          window.location.href = 'dash.html';
+          window.location.href = 'another.html';
         }, 800);
       } else {
         showError('Invalid Package ID. Please try again.');
