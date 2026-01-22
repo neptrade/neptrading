@@ -1,237 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Package ID Login - Professional</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Delivery Nepal | Premium Shopping</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/dist/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
 
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Lora:wght@500&family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        }
 
-<style>
-  /* Reset */
-  *, *::before, *::after {
-    box-sizing: border-box;
-  }
-  body, html {
-    height: 100%;
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    background: #f7f9fc;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #2c3e50;
-  }
+        .page-transition {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
 
-  /* Container */
-  .login-container {
-    background: #ffffff;
-    max-width: 400px;
-    width: 100%;
-    padding: 40px 35px;
-    border-radius: 12px;
-    box-shadow:
-      0 4px 6px rgba(0,0,0,0.1),
-      0 1px 3px rgba(0,0,0,0.06);
-    text-align: center;
-  }
+        .active {
+            display: block;
+        }
 
-  /* Header */
-  .login-container h1 {
-    font-family: 'Lora', serif;
-    font-weight: 500;
-    font-size: 2.6rem;
-    margin-bottom: 10px;
-    color: #34495e;
-  }
-  .login-container p.subtitle {
-    margin-bottom: 30px;
-    font-size: 1.05rem;
-    color: #7f8c8d;
-  }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-  /* Form */
-  form {
-    text-align: left;
-  }
-  label {
-    display: block;
-    margin-bottom: 6px;
-    font-weight: 600;
-    font-size: 1rem;
-    color: #34495e;
-  }
-  input[type="text"] {
-    width: 100%;
-    padding: 14px 18px;
-    border-radius: 8px;
-    border: 1.8px solid #bdc3c7;
-    font-size: 1rem;
-    transition: border-color 0.3s ease;
-    font-family: 'Poppins', sans-serif;
-    color: #2c3e50;
-  }
-  input[type="text"]::placeholder {
-    color: #95a5a6;
-  }
-  input[type="text"]:focus {
-    border-color: #2980b9;
-    outline: none;
-    box-shadow: 0 0 6px rgba(41, 128, 185, 0.4);
-  }
+        .btn-hover {
+            transition: all 0.3s ease;
+        }
 
-  /* Button */
-  button {
-    margin-top: 30px;
-    width: 100%;
-    background-color: #2980b9;
-    color: white;
-    border: none;
-    padding: 15px 0;
-    font-size: 1.1rem;
-    font-weight: 600;
-    border-radius: 8px;
-    cursor: pointer;
-    box-shadow: 0 6px 12px rgba(41, 128, 185, 0.3);
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  }
-  button:hover:not(:disabled) {
-    background-color: #1c5980;
-    box-shadow: 0 8px 15px rgba(28, 89, 128, 0.45);
-  }
-  button:disabled {
-    background-color: #7f8c8d;
-    cursor: not-allowed;
-    box-shadow: none;
-  }
-
-  /* Error message */
-  .error-message {
-    margin-top: 15px;
-    color: #e74c3c;
-    font-weight: 600;
-    font-size: 0.95rem;
-    min-height: 22px;
-    user-select: none;
-  }
-
-  /* Note */
-  .note {
-    margin-top: 30px;
-    font-size: 0.9rem;
-    color: #95a5a6;
-    text-align: center;
-  }
-  .note a {
-    color: #2980b9;
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.3s ease;
-  }
-  .note a:hover,
-  .note a:focus {
-    color: #1c5980;
-    outline: none;
-  }
-
-  /* Responsive */
-  @media (max-width: 450px) {
-    .login-container {
-      padding: 30px 25px;
-      margin: 20px;
-    }
-  }
-</style>
+        .btn-hover:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+    </style>
 </head>
-<body>
-  <main class="login-container" role="main" aria-labelledby="loginHeading">
-    <h1 id="loginHeading">Package ID Login</h1>
-    <p class="subtitle">Please enter your package ID to continue</p>
+<body class="flex items-center justify-center p-4">
 
-    <form id="loginForm" novalidate aria-describedby="errorMsg">
-      <label for="packageId">Package ID</label>
-      <input
-        type="text"
-        id="packageId"
-        name="packageId"
-        autocomplete="off"
-        required
-        minlength="3"
-        maxlength="20"
-        aria-required="true"
-        aria-invalid="false"
-      />
-      <button type="submit" aria-label="Login with Package ID">Login</button>
-    </form>
+    <div id="page1" class="page-transition active w-full max-w-2xl text-center">
+        <div class="glass-card p-10 md:p-16">
+            <div class="mb-6 text-6-xl text-indigo-600">
+                <i class="fas fa-shipping-fast fa-3x"></i>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+                Welcome to Home Delivery of <span class="text-indigo-600">Nepal</span>
+            </h1>
+            <p class="text-gray-600 mb-10 text-lg">Fastest delivery, premium products, and reliable service at your doorstep.</p>
+            <button onclick="navigateTo('page2')" class="btn-hover bg-indigo-600 text-white px-10 py-4 rounded-full font-bold text-xl shadow-lg">
+                Continue <i class="fas fa-arrow-right ml-2"></i>
+            </button>
+        </div>
+    </div>
 
-    <div id="errorMsg" class="error-message" role="alert" aria-live="assertive"></div>
+    <div id="page2" class="page-transition w-full max-w-xl">
+        <div class="glass-card p-8">
+            <button onclick="navigateTo('page1')" class="text-indigo-600 font-semibold mb-4 flex items-center">
+                <i class="fas fa-chevron-left mr-2"></i> Back
+            </button>
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 border-b pb-2">Customer Details</h2>
+            
+            <form id="orderForm" onsubmit="event.preventDefault(); navigateTo('page3');" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Full Name</label>
+                    <input type="text" required class="w-full p-3 mt-1 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none" placeholder="Enter your name">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Contact Number</label>
+                    <input type="tel" required class="w-full p-3 mt-1 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none" placeholder="+977-XXXXXXXXXX">
+                </div>
+                <div class="grid grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Size</label>
+                        <select class="w-full p-3 mt-1 border border-gray-300 rounded-lg outline-none">
+                            <option>S</option><option>M</option><option>L</option><option>XL</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Age</label>
+                        <input type="number" class="w-full p-3 mt-1 border border-gray-300 rounded-lg outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Height (cm)</label>
+                        <input type="number" class="w-full p-3 mt-1 border border-gray-300 rounded-lg outline-none">
+                    </div>
+                </div>
+                <button type="submit" class="btn-hover w-full bg-indigo-600 text-white py-4 rounded-lg font-bold text-lg mt-4">
+                    Submit Order
+                </button>
+            </form>
+        </div>
+    </div>
 
-    <p class="note">
-      If you don't have a package ID, Please buy a package
-    </p>
-  </main>
+    <div id="page3" class="page-transition w-full max-w-md">
+        <div class="glass-card p-8 text-center">
+            <button onclick="navigateTo('page2')" class="text-indigo-600 font-semibold mb-4 flex items-center">
+                <i class="fas fa-chevron-left mr-2"></i> Back
+            </button>
+            <h2 class="text-2xl font-bold text-gray-800 mb-2">Payment</h2>
+            <p class="text-gray-500 mb-6">Scan the QR code to complete payment</p>
+            
+            <div class="bg-gray-100 p-4 rounded-xl mb-6 inline-block border-2 border-dashed border-indigo-300">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=NepalDeliveryPayment" alt="Payment QR" class="mx-auto rounded-lg">
+                <p class="mt-2 text-xs font-bold text-indigo-600 uppercase">Official Payment Gateway</p>
+            </div>
 
-<script>
-  (() => {
-    const form = document.getElementById('loginForm');
-    const input = form.elements['packageId'];
-    const errorMsg = document.getElementById('errorMsg');
-    const validPackageId = 'Nep470';
-    const storageKey = 'savedPackageId';
+            <div class="mb-6">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Upload Screenshot of Payment</label>
+                <input type="file" id="screenshot" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100 cursor-pointer" />
+            </div>
 
-    // On page load, check if package ID is saved
-    window.addEventListener('DOMContentLoaded', () => {
-      const savedId = localStorage.getItem(storageKey);
-      if (savedId && savedId.toLowerCase() === validPackageId.toLowerCase()) {
-        input.value = savedId;
-        input.disabled = true;
-        form.querySelector('button').disabled = true;
-        form.querySelector('button').textContent = 'Redirecting...';
-        errorMsg.textContent = '';
-        setTimeout(() => {
-          window.location.href = 'another.html';
-        }, 1200);
-      }
-    });
+            <button onclick="finishOrder()" class="btn-hover w-full bg-green-500 text-white py-4 rounded-lg font-bold text-lg">
+                Next <i class="fas fa-check-circle ml-2"></i>
+            </button>
+        </div>
+    </div>
 
-    form.addEventListener('submit', e => {
-      e.preventDefault();
-      const val = input.value.trim();
+    <div id="page4" class="page-transition w-full max-w-md">
+        <div class="glass-card p-10 text-center">
+            <div class="w-20 h-20 bg-yellow-100 text-yellow-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                <i class="fas fa-clock fa-3x"></i>
+            </div>
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">Order Pending</h2>
+            <p class="text-gray-600 mb-8">We have received your details and payment screenshot. Our team will verify it and inform you soon via call/SMS.</p>
+            
+            <button onclick="navigateTo('page1')" class="btn-hover text-indigo-600 font-bold underline">
+                Return to Home
+            </button>
+        </div>
+    </div>
 
-      // Reset error state
-      errorMsg.textContent = '';
-      input.setAttribute('aria-invalid', 'false');
+    <script>
+        // Function to switch between pages with a smooth feel
+        function navigateTo(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page-transition').forEach(page => {
+                page.classList.remove('active');
+            });
+            // Show requested page
+            document.getElementById(pageId).classList.add('active');
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
 
-      if (!val) {
-        showError('Package ID cannot be empty.');
-        return;
-      }
+        // Logic for the final step
+        function finishOrder() {
+            const screenshotInput = document.getElementById('screenshot');
+            if (screenshotInput.files.length === 0) {
+                alert("Please upload the payment screenshot before clicking next.");
+            } else {
+                navigateTo('page4');
+            }
+        }
+    </script>
 
-      if (val.toLowerCase() === validPackageId.toLowerCase()) {
-        // Save to localStorage
-        localStorage.setItem(storageKey, val);
-
-        // Disable inputs & button
-        input.disabled = true;
-        form.querySelector('button').disabled = true;
-        form.querySelector('button').textContent = 'Logging in...';
-
-        // Redirect after short delay
-        setTimeout(() => {
-          window.location.href = 'another.html';
-        }, 800);
-      } else {
-        showError('Invalid Package ID. Please try again.');
-        input.setAttribute('aria-invalid', 'true');
-        input.focus();
-      }
-    });
-
-    function showError(message) {
-      errorMsg.textContent = message;
-    }
-  })();
-</script>
 </body>
 </html>
